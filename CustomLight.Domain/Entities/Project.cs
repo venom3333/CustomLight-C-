@@ -28,7 +28,6 @@ namespace CustomLight.Domain.Entities
 		[Column(TypeName = "DateTime2")]
 		public DateTime Updated { get; set; }
 
-
 		public virtual ICollection<Image> Images { get; set; }
 	}
 }

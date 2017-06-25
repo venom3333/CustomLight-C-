@@ -1,2 +1,4 @@
-﻿body {
+﻿body div{
+	background: rgba(0, 0, 0, 0.75);
+	color: #ff6a00;
 }

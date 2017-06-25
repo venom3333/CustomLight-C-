@@ -13,10 +13,10 @@ namespace CustomLight.Domain
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CustomLightEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public CustomLightEntities()
-            : base("name=CustomLightEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
@@ -25,10 +25,11 @@ namespace CustomLight.Domain
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Images> Images { get; set; }
+        public virtual DbSet<Pages> Pages { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Projects> Projects { get; set; }
+        public virtual DbSet<Specifications> Specifications { get; set; }
     }
 }

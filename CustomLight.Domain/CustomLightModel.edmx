@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище CustomLightModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище CustomLightModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -28,6 +28,14 @@
           <Property Name="Created" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Updated" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
+        <EntityType Name="ImageProducts">
+          <Key>
+            <PropertyRef Name="Image_Id" />
+            <PropertyRef Name="Product_Id" />
+          </Key>
+          <Property Name="Image_Id" Type="int" Nullable="false" />
+          <Property Name="Product_Id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Images">
           <Key>
             <PropertyRef Name="Id" />
@@ -38,13 +46,16 @@
           <Property Name="Created" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Updated" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
-        <EntityType Name="ProductImages">
+        <EntityType Name="Pages">
           <Key>
-            <PropertyRef Name="Product_Id" />
-            <PropertyRef Name="Image_Id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Product_Id" Type="int" Nullable="false" />
-          <Property Name="Image_Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Alias" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Created" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Updated" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -59,6 +70,7 @@
           <Property Name="IsPublished" Type="bit" Nullable="false" />
           <Property Name="Created" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Updated" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Category_Id" Type="int" />
         </EntityType>
         <EntityType Name="ProjectImages">
           <Key>
@@ -81,32 +93,71 @@
           <Property Name="IsPublished" Type="bit" Nullable="false" />
           <Property Name="Created" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Updated" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Category_Id" Type="int" />
         </EntityType>
-        <Association Name="FK_dbo_ProductImages_dbo_Images_Image_Id">
+        <EntityType Name="Specifications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Diameter" Type="int" Nullable="false" />
+          <Property Name="Length" Type="int" Nullable="false" />
+          <Property Name="Width" Type="int" Nullable="false" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="Power" Type="int" Nullable="false" />
+          <Property Name="LightOutput" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Created" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Updated" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Product_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_ImageProducts_dbo_Images_Image_Id">
           <End Role="Images" Type="Self.Images" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="ProductImages" Type="Self.ProductImages" Multiplicity="*" />
+          <End Role="ImageProducts" Type="Self.ImageProducts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Images">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ProductImages">
+            <Dependent Role="ImageProducts">
               <PropertyRef Name="Image_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_ProductImages_dbo_Products_Product_Id">
+        <Association Name="FK_dbo_ImageProducts_dbo_Products_Product_Id">
           <End Role="Products" Type="Self.Products" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="ProductImages" Type="Self.ProductImages" Multiplicity="*" />
+          <End Role="ImageProducts" Type="Self.ImageProducts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ProductImages">
+            <Dependent Role="ImageProducts">
               <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Products_dbo_Categories_Category_Id">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Category_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -138,21 +189,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_Projects_dbo_Categories_Category_Id">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Specifications_dbo_Products_Product_Id">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Specifications" Type="Self.Specifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Specifications">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище CustomLightModelContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImageProducts" EntityType="Self.ImageProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProductImages" EntityType="Self.ProductImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProjectImages" EntityType="Self.ProjectImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_dbo_ProductImages_dbo_Images_Image_Id" Association="Self.FK_dbo_ProductImages_dbo_Images_Image_Id">
+          <EntitySet Name="Specifications" EntityType="Self.Specifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_ImageProducts_dbo_Images_Image_Id" Association="Self.FK_dbo_ImageProducts_dbo_Images_Image_Id">
             <End Role="Images" EntitySet="Images" />
-            <End Role="ProductImages" EntitySet="ProductImages" />
+            <End Role="ImageProducts" EntitySet="ImageProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_ProductImages_dbo_Products_Product_Id" Association="Self.FK_dbo_ProductImages_dbo_Products_Product_Id">
+          <AssociationSet Name="FK_dbo_ImageProducts_dbo_Products_Product_Id" Association="Self.FK_dbo_ImageProducts_dbo_Products_Product_Id">
             <End Role="Products" EntitySet="Products" />
-            <End Role="ProductImages" EntitySet="ProductImages" />
+            <End Role="ImageProducts" EntitySet="ImageProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Products_dbo_Categories_Category_Id" Association="Self.FK_dbo_Products_dbo_Categories_Category_Id">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_ProjectImages_dbo_Images_Image_Id" Association="Self.FK_dbo_ProjectImages_dbo_Images_Image_Id">
             <End Role="Images" EntitySet="Images" />
@@ -162,21 +244,20 @@
             <End Role="Projects" EntitySet="Projects" />
             <End Role="ProjectImages" EntitySet="ProjectImages" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_Projects_dbo_Categories_Category_Id" Association="Self.FK_dbo_Projects_dbo_Categories_Category_Id">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Specifications_dbo_Products_Product_Id" Association="Self.FK_dbo_Specifications_dbo_Products_Product_Id">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Specifications" EntitySet="Specifications" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CustomLightModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="Id" />
@@ -189,6 +270,8 @@
           <Property Name="IconMimeType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Products_dbo_Categories_Category_Id" FromRole="Categories" ToRole="Products" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_dbo_Projects_dbo_Categories_Category_Id" FromRole="Categories" ToRole="Projects" />
         </EntityType>
         <EntityType Name="Images">
           <Key>
@@ -199,8 +282,19 @@
           <Property Name="ImageMimeType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Products" Relationship="Self.ProductImages" FromRole="Images" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.ImageProducts" FromRole="Images" ToRole="Products" />
           <NavigationProperty Name="Projects" Relationship="Self.ProjectImages" FromRole="Images" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Alias" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Updated" Type="DateTime" Nullable="false" Precision="7" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -215,7 +309,10 @@
           <Property Name="IsPublished" Type="Boolean" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Images" Relationship="Self.ProductImages" FromRole="Products" ToRole="Images" />
+          <Property Name="Category_Id" Type="Int32" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK_dbo_Products_dbo_Categories_Category_Id" FromRole="Products" ToRole="Categories" />
+          <NavigationProperty Name="Specifications" Relationship="Self.FK_dbo_Specifications_dbo_Products_Product_Id" FromRole="Products" ToRole="Specifications" />
+          <NavigationProperty Name="Images" Relationship="Self.ImageProducts" FromRole="Products" ToRole="Images" />
         </EntityType>
         <EntityType Name="Projects">
           <Key>
@@ -230,9 +327,64 @@
           <Property Name="IsPublished" Type="Boolean" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Category_Id" Type="Int32" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK_dbo_Projects_dbo_Categories_Category_Id" FromRole="Projects" ToRole="Categories" />
           <NavigationProperty Name="Images" Relationship="Self.ProjectImages" FromRole="Projects" ToRole="Images" />
         </EntityType>
-        <Association Name="ProductImages">
+        <EntityType Name="Specifications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Diameter" Type="Int32" Nullable="false" />
+          <Property Name="Length" Type="Int32" Nullable="false" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
+          <Property Name="Power" Type="Int32" Nullable="false" />
+          <Property Name="LightOutput" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Updated" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Product_Id" Type="Int32" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Specifications_dbo_Products_Product_Id" FromRole="Specifications" ToRole="Products" />
+        </EntityType>
+        <Association Name="FK_dbo_Products_dbo_Categories_Category_Id">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Projects_dbo_Categories_Category_Id">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Specifications_dbo_Products_Product_Id">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Specifications" Type="Self.Specifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Specifications">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ImageProducts">
           <End Role="Images" Type="Self.Images" Multiplicity="*" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
         </Association>
@@ -240,13 +392,26 @@
           <End Role="Images" Type="Self.Images" Multiplicity="*" />
           <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="CustomLightEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Categories" />
           <EntitySet Name="Images" EntityType="Self.Images" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" />
           <EntitySet Name="Products" EntityType="Self.Products" />
           <EntitySet Name="Projects" EntityType="Self.Projects" />
-          <AssociationSet Name="ProductImages" Association="Self.ProductImages">
+          <EntitySet Name="Specifications" EntityType="Self.Specifications" />
+          <AssociationSet Name="FK_dbo_Products_dbo_Categories_Category_Id" Association="Self.FK_dbo_Products_dbo_Categories_Category_Id">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Projects_dbo_Categories_Category_Id" Association="Self.FK_dbo_Projects_dbo_Categories_Category_Id">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Specifications_dbo_Products_Product_Id" Association="Self.FK_dbo_Specifications_dbo_Products_Product_Id">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Specifications" EntitySet="Specifications" />
+          </AssociationSet>
+          <AssociationSet Name="ImageProducts" Association="Self.ImageProducts">
             <End Role="Images" EntitySet="Images" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
@@ -260,17 +425,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CustomLightModelContainer" CdmEntityContainer="CustomLightEntities">
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="CustomLightModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="Хранилище CustomLightModelContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="CustomLightModel.Categories">
               <MappingFragment StoreEntitySet="Categories">
@@ -296,6 +451,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="CustomLightModel.Pages">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="CustomLightModel.Products">
               <MappingFragment StoreEntitySet="Products">
@@ -308,6 +475,7 @@
                 <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -323,10 +491,28 @@
                 <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="ProductImages" TypeName="CustomLightModel.ProductImages" StoreEntitySet="ProductImages">
+          <EntitySetMapping Name="Specifications">
+            <EntityTypeMapping TypeName="CustomLightModel.Specifications">
+              <MappingFragment StoreEntitySet="Specifications">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Diameter" ColumnName="Diameter" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Power" ColumnName="Power" />
+                <ScalarProperty Name="LightOutput" ColumnName="LightOutput" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ImageProducts" TypeName="CustomLightModel.ImageProducts" StoreEntitySet="ImageProducts">
             <EndProperty Name="Images">
               <ScalarProperty Name="Id" ColumnName="Image_Id" />
             </EndProperty>

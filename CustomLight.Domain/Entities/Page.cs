@@ -9,25 +9,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CustomLight.Domain.Entities
 {
-	public class Category
+	public class Page
 	{
 		[Key]
 		public int Id { get; set; }
 
 		[Required]
+		public string Alias { get; set; }
 		public string Name { get; set; }
-		public string Description { get; set; }
-		public string ShortDescription { get; set; }
-		public byte[]  Icon { get; set; }
-		public string IconMimeType { get; set; }
+		public string Content { get; set; }
 
 		[Column(TypeName = "DateTime2")]
 		public DateTime Created { get; set; }
 
 		[Column(TypeName = "DateTime2")]
 		public DateTime Updated { get; set; }
-
-		public virtual ICollection<Product> Products { get; set; }
-		public virtual ICollection<Project> Projects { get; set; }
 	}
 }

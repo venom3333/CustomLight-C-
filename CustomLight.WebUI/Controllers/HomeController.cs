@@ -18,17 +18,21 @@ namespace CustomLight.WebUI.Controllers
 		{
 			using (AppDbContext db = new AppDbContext())
 			{
-				this.Categories = db.Categories.ToList();
-				//Category cat1 = new Category { Name = "Prob2", Description = "TEST!!!", ShortDescription = "LALALA!!!", Created = DateTime.Now, Updated = DateTime.Now };
-				//Categories.Add(cat1);
+				//for (int i = 0; i < 8; i++)
+				//{
+				//	Category cat = new Category { Name = "Prob_" + i, Description = "TEasdasdST!!_" + i, ShortDescription = "LALALffffA!!_" + i, Created = DateTime.Now, Updated = DateTime.Now };
+				//	db.Categories.Add(cat);
+				//}
 				//db.SaveChanges();
+				this.Categories = db.Categories.ToList();
 			}
 		}
 
         // GET: Home
         public ActionResult Index()
         {
-            return View(Categories);
+			ViewBag.Categories = Categories;
+            return View();
         }
     }
 }

@@ -12,11 +12,20 @@ namespace CustomLight.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class C__MigrationHistory
+    public partial class Specifications
     {
-        public string MigrationId { get; set; }
-        public string ContextKey { get; set; }
-        public byte[] Model { get; set; }
-        public string ProductVersion { get; set; }
+        public int Id { get; set; }
+        public int Diameter { get; set; }
+        public int Length { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public int Power { get; set; }
+        public int LightOutput { get; set; }
+        public double Price { get; set; }
+        public System.DateTime Created { get; set; }
+        public System.DateTime Updated { get; set; }
+        public Nullable<int> Product_Id { get; set; }
+    
+        public virtual Products Products { get; set; }
     }
 }

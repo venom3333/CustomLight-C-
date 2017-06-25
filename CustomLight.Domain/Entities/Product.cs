@@ -30,5 +30,7 @@ namespace CustomLight.Domain.Entities
 
 
 		public virtual ICollection<Image> Images { get; set; }
+
+		public virtual ICollection<Specification> Specifications { get; set; }
 	}
 }

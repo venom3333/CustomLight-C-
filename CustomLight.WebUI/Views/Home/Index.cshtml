@@ -2,20 +2,18 @@
 	Layout = "~/Views/_Layouts/Main.cshtml";
 }
 
-<div>
-
-	<table class="table table-responsive table-striped table-hover table-condensed">
-		@foreach (CustomLight.Domain.Entities.Category item in Model)
+<div class="container">
+	
+		@foreach (CustomLight.Domain.Entities.Category item in ViewBag.Categories)
 		{
-			<tr>
-				<td>@item.Id</td>
-				<td>@item.Name</td>
-				<td>@item.Created</td>
-				<td>@item.Updated</td>
-				<td>@item.Description</td>
-				<td>@item.ShortDescription</td>
-			</tr>
+			<div class="col-lg-3">
+				<p>@item.Name</p>
+				<p>@item.Created</p>
+				<p>@item.Updated</p>
+				<p>@item.Description</p>
+				<p>@item.ShortDescription</p>
+			</div>
+				
 		}
-	</table>
 </div>
 

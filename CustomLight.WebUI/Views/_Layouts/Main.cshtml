@@ -13,8 +13,14 @@
 
 </head>
 <body>
+	<header>
+		@Html.Partial("~/Views/common/_Header.cshtml")
+	</header>
     <div>
         @RenderBody()
     </div>
+	<footer>
+		@Html.Partial("~/Views/common/_Footer.cshtml")
+	</footer>
 </body>
 </html>

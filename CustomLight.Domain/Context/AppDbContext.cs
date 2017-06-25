@@ -19,5 +19,6 @@ namespace CustomLight.Domain.Context
 		public DbSet<Product> Products { get; set; }
 		public DbSet<Project> Projects { get; set; }
 		public DbSet<Image> Images { get; set; }
+		public DbSet<Page> Pages { get; set; }
 	}
 }
