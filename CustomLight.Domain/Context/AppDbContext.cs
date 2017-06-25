@@ -8,9 +8,9 @@ using CustomLight.Domain.Entities;
 
 namespace CustomLight.Domain.Context
 {
-	class AppContext : DbContext
+	public class AppDbContext : DbContext
 	{
-		public AppContext() : base("DbConnection")
+		public AppDbContext() : base("DbConnection")
 		{
 
 		}

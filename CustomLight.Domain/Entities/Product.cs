@@ -11,6 +11,7 @@ namespace CustomLight.Domain.Entities
 {
 	public class Product
 	{
+		[Key]
 		public int Id { get; set; }
 
 		[Required]

@@ -11,6 +11,7 @@ namespace CustomLight.Domain.Entities
 {
 	public class Category
 	{
+		[Key]
 		public int Id { get; set; }
 
 		[Required]
@@ -19,5 +20,11 @@ namespace CustomLight.Domain.Entities
 		public string ShortDescription { get; set; }
 		public byte[]  Icon { get; set; }
 		public string IconMimeType { get; set; }
+
+		[Column(TypeName = "DateTime2")]
+		public DateTime Created { get; set; }
+
+		[Column(TypeName = "DateTime2")]
+		public DateTime Updated { get; set; }
 	}
 }

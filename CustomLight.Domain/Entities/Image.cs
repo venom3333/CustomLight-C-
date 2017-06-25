@@ -11,10 +11,17 @@ namespace CustomLight.Domain.Entities
 {
 	public class Image
 	{
-		public int Id;
+		[Key]
+		public int Id { get; set; }
 
 		public byte[] ImageData { get; set; }
 		public string ImageMimeType { get; set; }
+
+		[Column(TypeName = "DateTime2")]
+		public DateTime Created { get; set; }
+
+		[Column(TypeName = "DateTime2")]
+		public DateTime Updated { get; set; }
 
 		public virtual ICollection<Project> Projects{ get; set; }
 		public virtual ICollection<Product> Products{ get; set; }
