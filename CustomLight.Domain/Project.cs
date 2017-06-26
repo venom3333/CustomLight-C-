@@ -12,13 +12,13 @@ namespace CustomLight.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Categories
+    public partial class Project
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Categories()
+        public Project()
         {
-            this.Products = new HashSet<Products>();
-            this.Projects = new HashSet<Projects>();
+            this.Categories = new HashSet<Category>();
+            this.Images = new HashSet<Image>();
         }
     
         public int Id { get; set; }
@@ -27,12 +27,13 @@ namespace CustomLight.Domain
         public string ShortDescription { get; set; }
         public byte[] Icon { get; set; }
         public string IconMimeType { get; set; }
+        public bool IsPublished { get; set; }
         public System.DateTime Created { get; set; }
         public System.DateTime Updated { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Projects> Projects { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

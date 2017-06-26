@@ -70,56 +70,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Categories.cs">
-      <DependentUpon>CustomLightModel.tt</DependentUpon>
+    <Compile Include="Category.cs">
+      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\AppDbContext.cs" />
-    <Compile Include="CustomLightModel.Context.cs">
+    <Compile Include="CustomLightDbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CustomLightModel.Context.tt</DependentUpon>
+      <DependentUpon>CustomLightDbModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomLightModel.cs">
+    <Compile Include="CustomLightDbModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CustomLightModel.tt</DependentUpon>
+      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomLightModel.Designer.cs">
+    <Compile Include="CustomLightDbModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CustomLightModel.edmx</DependentUpon>
+      <DependentUpon>CustomLightDbModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Specification.cs" />
-    <Compile Include="Entities\Page.cs" />
-    <Compile Include="Entities\Image.cs" />
-    <Compile Include="Entities\Project.cs" />
-    <Compile Include="Entities\Product.cs" />
-    <Compile Include="Entities\Category.cs" />
-    <Compile Include="Images.cs">
-      <DependentUpon>CustomLightModel.tt</DependentUpon>
+    <Compile Include="Image.cs">
+      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pages.cs">
-      <DependentUpon>CustomLightModel.tt</DependentUpon>
+    <Compile Include="Page.cs">
+      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Products.cs">
-      <DependentUpon>CustomLightModel.tt</DependentUpon>
+    <Compile Include="Product.cs">
+      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Projects.cs">
-      <DependentUpon>CustomLightModel.tt</DependentUpon>
+    <Compile Include="Project.cs">
+      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Specifications.cs">
-      <DependentUpon>CustomLightModel.tt</DependentUpon>
+    <Compile Include="Specification.cs">
+      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="CustomLightModel.edmx">
+    <EntityDeploy Include="CustomLightDbModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CustomLightModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>CustomLightDbModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="CustomLightModel.edmx.diagram">
-      <DependentUpon>CustomLightModel.edmx</DependentUpon>
+    <None Include="CustomLightDbModel.edmx.diagram">
+      <DependentUpon>CustomLightDbModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -127,15 +123,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CustomLightModel.Context.tt">
+    <Content Include="CustomLightDbModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CustomLightModel.edmx</DependentUpon>
-      <LastGenOutput>CustomLightModel.Context.cs</LastGenOutput>
+      <DependentUpon>CustomLightDbModel.edmx</DependentUpon>
+      <LastGenOutput>CustomLightDbModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="CustomLightModel.tt">
+    <Content Include="CustomLightDbModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CustomLightModel.edmx</DependentUpon>
-      <LastGenOutput>CustomLightModel.cs</LastGenOutput>
+      <DependentUpon>CustomLightDbModel.edmx</DependentUpon>
+      <LastGenOutput>CustomLightDbModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

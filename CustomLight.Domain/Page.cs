@@ -12,20 +12,13 @@ namespace CustomLight.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Specifications
+    public partial class Page
     {
         public int Id { get; set; }
-        public int Diameter { get; set; }
-        public int Length { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public int Power { get; set; }
-        public int LightOutput { get; set; }
-        public double Price { get; set; }
+        public string Alias { get; set; }
+        public string Name { get; set; }
+        public string PageContent { get; set; }
         public System.DateTime Created { get; set; }
         public System.DateTime Updated { get; set; }
-        public Nullable<int> Product_Id { get; set; }
-    
-        public virtual Products Products { get; set; }
     }
 }

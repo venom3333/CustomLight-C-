@@ -12,24 +12,31 @@ namespace CustomLight.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Images
+    public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Images()
+        public Product()
         {
-            this.Products = new HashSet<Products>();
-            this.Projects = new HashSet<Projects>();
+            this.Specifications = new HashSet<Specification>();
+            this.Categories = new HashSet<Category>();
+            this.Images = new HashSet<Image>();
         }
     
         public int Id { get; set; }
-        public byte[] ImageData { get; set; }
-        public string ImageMimeType { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string ShortDescription { get; set; }
+        public byte[] Icon { get; set; }
+        public string IconMimeType { get; set; }
+        public bool IsPublished { get; set; }
         public System.DateTime Created { get; set; }
         public System.DateTime Updated { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<Specification> Specifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Projects> Projects { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace CustomLight.Domain
     public partial class Entities : DbContext
     {
         public Entities()
-            : base("name=Entities")
+            : base("name=CustomLightEntities")
         {
         }
     
@@ -25,11 +25,12 @@ namespace CustomLight.Domain
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Categories> Categories { get; set; }
-        public virtual DbSet<Images> Images { get; set; }
-        public virtual DbSet<Pages> Pages { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<Projects> Projects { get; set; }
-        public virtual DbSet<Specifications> Specifications { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<Page> Pages { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<Specification> Specifications { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }
