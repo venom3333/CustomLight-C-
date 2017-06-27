@@ -1,0 +1,109 @@
+﻿@model CustomLight.Models.Product
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Views/_Layouts/_Main.cshtml";
+}
+
+<!--Инфо о продукте-->
+<div class="col-md-10 product-model-sec">
+	<h2 id="productName">@Model.Name</h2>
+
+	<!--	Не отображается (нужно для корзины)-->
+	@*<div id="productIcon" style="display: none;"><?= $product['icon'] ?></div>*@
+	<div id="productId" style="display: none;">>@Model.Id</div>
+	<!--	/Не отображается (нужно для корзины)-->
+	<!--Галерея-->
+	<section id="myCarousel" class="carousel slide my-carousel col-md-7">
+		<!-- Indicators -->
+		<ol class="carousel-indicators image-carousel-indicators">
+			@{int counter = 0;
+				foreach (var image in Model.ProductImages)
+				{
+					<li data-target="#myCarousel" data-slide-to="@counter++;"
+						@if (counter == 1) { Html.Raw("class = \"myCarousel active\""); } else { Html.Raw("class = \"myCarousel\""); }>
+						<img src="@Url.Action("GetProductImage", "Products", new { ImageId = image.Id })" class="img-responsive" alt="@Model.Name">
+					</li>
+				}
+			}
+		</ol>
+		<!-- Wrapper for Slides -->
+		<div class="carousel-inner">
+			@{counter = 0;
+				foreach (var image in Model.ProductImages)
+				{
+					counter++;
+					<div @if (@counter == 1) { Write("class = \"item active\""); } else { Write("class = \"item\""); }>
+
+						<!-- Set the first background image using inline CSS below. -->
+
+						<div class="fill" style="background-image:url('@Url.Action("GetProductImage", "Products", new { ImageId = image.Id })');"></div>
+						<div class="carousel-caption">
+							<h2>Caption 1</h2>
+						</div>
+					</div>
+				}
+			}
+		</div>
+
+		<!-- Controls -->
+		<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+			<span class="icon-prev"></span>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" data-slide="next">
+			<span class="icon-next"></span>
+		</a>
+	</section>
+	<!--/Галерея-->
+
+	<section class="itemDescription">
+		<p>@Model.Description</p>
+	</section>
+	<div class="clear"></div>
+
+	<div class="table-responsive">
+		<table class="table table-bordered table-striped table-hover sort_table">
+			<thead>
+				<tr>
+					<th>Диаметр</th>
+					<th>Длина</th>
+					<th>Ширина</th>
+					<th>Высота</th>
+					<th>Мощность</th>
+					<th>Cветовой поток</th>
+					<th>Цена</th>
+					<th>Кол-во</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@{ int i = 0;
+					foreach (var specification in Model.Specifications)
+					{
+						<tr class="@Html.Raw("spec" + i)" id="@Html.Raw("spec" + i)">
+							<td class="@Html.Raw("spec" + i)" id="@Html.Raw("spec" + i + "Diameter")">@specification.Diameter</td>
+							<td class="@Html.Raw("spec" + i)" id="@Html.Raw("spec" + i + "Length")">@specification.Length</td>
+							<td class="@Html.Raw("spec" + i)" id="@Html.Raw("spec" + i + "Width")">@specification.Width</td>
+							<td class="@Html.Raw("spec" + i)" id="@Html.Raw("spec" + i + "Height")">@specification.Height</td>
+							<td class="@Html.Raw("spec" + i)" id="@Html.Raw("spec" + i + "Power")">@specification.Power</td>
+							<td class="@Html.Raw("spec" + i)" id="@Html.Raw("spec" + i + "LightOutput")">@specification.LightOutput</td>
+							<td class="@Html.Raw("spec" + i)" id="@Html.Raw("spec" + i + "Price")">@specification.Price</td>
+							<td>
+								<input type="number" class="@Html.Raw("spec" + i)" id="@Html.Raw("spec" + i + "Quantity")" min="1" value="1"
+									   style="width: 3em;">
+							</td>
+							<td class="cart-button @Html.Raw("spec" + i)" id="@Html.Raw("spec" + i + "CartButton")">
+								+
+								<div class="glyphicon glyphicon-shopping-cart"></div>
+							</td>
+						</tr>
+						i++;
+					}
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+<!--/Инфо о продукте-->
+<script src="~/Content/js/cart.js"></script>
+

@@ -9,119 +9,112 @@ using System.Web;
 using System.Web.Mvc;
 using CustomLight.Models;
 using System.Web.UI;
-using System.IO;
 
 namespace CustomLight.Controllers
 {
-    public class CategoriesController : Controller
+    public class ProductsController : Controller
     {
         private CustomLightEntities db = new CustomLightEntities();
 
-		public CategoriesController()
-		{
-			
-		}
-
-		// GET: Categories
-		public async Task<ActionResult> Index()
+        // GET: Products
+        public async Task<ActionResult> Index()
         {
-			ViewBag.Categories = await db.Categories.ToListAsync();
-			return View(await db.Categories.ToListAsync());
+            return View(await db.Products.ToListAsync());
         }
 
-        // GET: Categories/Details/5
+        // GET: Products/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = await db.Categories.FindAsync(id);
-            if (category == null)
+            Product product = await db.Products.FindAsync(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
 
 			ViewBag.Categories = await db.Categories.ToListAsync();
-			return View(category);
+			return View(product);
         }
 
-        // GET: Categories/Create
+        // GET: Products/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Categories/Create
+        // POST: Products/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Description,ShortDescription,Icon,IconMimeType,Created,Updated")] Category category)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Description,ShortDescription,Icon,IconMimeType,IsPublished,Created,Updated")] Product product)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
+                db.Products.Add(product);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            return View(product);
         }
 
-        // GET: Categories/Edit/5
+        // GET: Products/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = await db.Categories.FindAsync(id);
-            if (category == null)
+            Product product = await db.Products.FindAsync(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(product);
         }
 
-        // POST: Categories/Edit/5
+        // POST: Products/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Description,ShortDescription,Icon,IconMimeType,Created,Updated")] Category category)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Description,ShortDescription,Icon,IconMimeType,IsPublished,Created,Updated")] Product product)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
+                db.Entry(product).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            return View(product);
         }
 
-        // GET: Categories/Delete/5
+        // GET: Products/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = await db.Categories.FindAsync(id);
-            if (category == null)
+            Product product = await db.Products.FindAsync(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(product);
         }
 
-        // POST: Categories/Delete/5
+        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Category category = await db.Categories.FindAsync(id);
-            db.Categories.Remove(category);
+            Product product = await db.Products.FindAsync(id);
+            db.Products.Remove(product);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -135,16 +128,15 @@ namespace CustomLight.Controllers
             base.Dispose(disposing);
         }
 
-
 		[OutputCache(Duration = 3600, Location = OutputCacheLocation.Client, VaryByParam = "id")]
-		public FileContentResult GetCategoryIcon(int Id)
+		public FileContentResult GetProductIcon(int Id)
 		{
-			Category cat = db.Categories
-				.FirstOrDefault(c => c.Id == Id);
+			Product product = db.Products
+				.FirstOrDefault(p => p.Id == Id);
 
-			if (cat.Icon != null)
+			if (product.Icon != null)
 			{
-				return File(cat.Icon, cat.IconMimeType);
+				return File(product.Icon, product.IconMimeType);
 			}
 			else
 			{
@@ -152,36 +144,19 @@ namespace CustomLight.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Тестовый метод, наполняет БД фейками
-		/// private чтобы случайно не запустить по URL
-		/// </summary>
-		private void TestFillDB()
+		[OutputCache(Duration = 3600, Location = OutputCacheLocation.Client, VaryByParam = "ImageId")]
+		public FileContentResult GetProductImage(int ImageId)
 		{
-			TestFillCategories();
-		}
+			ProductImage image = db.ProductImages.FirstOrDefault(i => i.Id == ImageId);
 
-		private void TestFillCategories()
-		{
-			for (int i = 0; i < 8; i++)
+			if (image != null)
 			{
-				var filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content/imgs/icons/icon_" + (i + 1) + ".jpg");
-				byte[] iconData = System.IO.File.ReadAllBytes(filepath);
-				string iconMimeType = "image/jpg";
-				var now = DateTime.Now;
-				Category cat = new Category
-				{
-					Name = "Наименование_" + i,
-					Description = "Описание_" + i,
-					ShortDescription = "Краткое описание_" + i,
-					Icon = iconData,
-					IconMimeType = iconMimeType,
-					Created = now,
-					Updated = now,
-				};
-				db.Categories.Add(cat);
+				return File(image.ImageData, image.ImageMimeType);
 			}
-			db.SaveChanges();
+			else
+			{
+				return null;
+			}
 		}
 	}
 }

@@ -19,7 +19,7 @@
 		if (product.IsPublished)
 		{
 			<div class="product-grid col-md-3">
-				<a href="/product/Details/@product.Id">
+				<a href="/products/Details/@product.Id">
 					<div class="product-img">
 						<img src="@Url.Action("GetProductIcon", "Products", new { Id = product.Id })" class="img-responsive" alt="@product.Name">
 						<div class="b-wrapper">
@@ -48,7 +48,7 @@
 		if (project.IsPublished)
 		{
 			<div class="product-grid col-md-3">
-				<a href="/project/Details/@project.Id">
+				<a href="/projects/Details/@project.Id">
 					<div class="product-img">
 						<img src="@Url.Action("GetProjectIcon", "Projects", new { Id = project.Id })" class="img-responsive" alt="@project.Name">
 					</div>

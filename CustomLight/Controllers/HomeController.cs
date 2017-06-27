@@ -13,7 +13,7 @@ namespace CustomLight.Controllers
 {
     public class HomeController : Controller
     {
-		private Entities db = new Entities();
+		private CustomLightEntities db = new CustomLightEntities();
 
 		public HomeController()
 		{

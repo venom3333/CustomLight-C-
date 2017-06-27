@@ -10,17 +10,10 @@
 namespace CustomLight.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Essential
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public byte[] LogoImageData { get; set; }
-        public string LogoImageMimeType { get; set; }
-        public string About { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
-        public string Boss { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
