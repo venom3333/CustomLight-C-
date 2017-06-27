@@ -7,20 +7,15 @@
     <Schema Namespace="CustomLightDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="CustomLightDbModelStoreContainer">
     <EntitySet Name="Categories" EntityType="CustomLightDbModel.Store.Categories" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Images" EntityType="CustomLightDbModel.Store.Images" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProjectImages1" EntityType="CustomLightDbModel.Store.ProjectImages1" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Pages" EntityType="CustomLightDbModel.Store.Pages" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Products" EntityType="CustomLightDbModel.Store.Products" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Projects" EntityType="CustomLightDbModel.Store.Projects" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Specifications" EntityType="CustomLightDbModel.Store.Specifications" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="sysdiagrams" EntityType="CustomLightDbModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ProductCategories" EntityType="CustomLightDbModel.Store.ProductCategories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProductImages" EntityType="CustomLightDbModel.Store.ProductImages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductCategories" EntityType="CustomLightDbModel.Store.ProductCategories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProjectCategories" EntityType="CustomLightDbModel.Store.ProjectCategories" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ProjectImages" EntityType="CustomLightDbModel.Store.ProjectImages" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_Specifications_Products" Association="CustomLightDbModel.Store.FK_Specifications_Products">
-      <End Role="Products" EntitySet="Products" />
-      <End Role="Specifications" EntitySet="Specifications" />
-    </AssociationSet>
     <AssociationSet Name="FK_ProductCategories_Categories" Association="CustomLightDbModel.Store.FK_ProductCategories_Categories">
       <End Role="Categories" EntitySet="Categories" />
       <End Role="ProductCategories" EntitySet="ProductCategories" />
@@ -28,14 +23,6 @@
     <AssociationSet Name="FK_ProductCategories_Products" Association="CustomLightDbModel.Store.FK_ProductCategories_Products">
       <End Role="Products" EntitySet="Products" />
       <End Role="ProductCategories" EntitySet="ProductCategories" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProductImages_Images" Association="CustomLightDbModel.Store.FK_ProductImages_Images">
-      <End Role="Images" EntitySet="Images" />
-      <End Role="ProductImages" EntitySet="ProductImages" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProductImages_Products" Association="CustomLightDbModel.Store.FK_ProductImages_Products">
-      <End Role="Products" EntitySet="Products" />
-      <End Role="ProductImages" EntitySet="ProductImages" />
     </AssociationSet>
     <AssociationSet Name="FK_ProjectCategories_Categories" Association="CustomLightDbModel.Store.FK_ProjectCategories_Categories">
       <End Role="Categories" EntitySet="Categories" />
@@ -45,13 +32,17 @@
       <End Role="Projects" EntitySet="Projects" />
       <End Role="ProjectCategories" EntitySet="ProjectCategories" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProjectImages_Images" Association="CustomLightDbModel.Store.FK_ProjectImages_Images">
-      <End Role="Images" EntitySet="Images" />
-      <End Role="ProjectImages" EntitySet="ProjectImages" />
+    <AssociationSet Name="ProductProductImage" Association="CustomLightDbModel.Store.ProductProductImage">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductImage" EntitySet="ProductImages" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProjectImages_Projects" Association="CustomLightDbModel.Store.FK_ProjectImages_Projects">
-      <End Role="Projects" EntitySet="Projects" />
-      <End Role="ProjectImages" EntitySet="ProjectImages" />
+    <AssociationSet Name="ProjectProjectImage" Association="CustomLightDbModel.Store.ProjectProjectImage">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="ProjectImage" EntitySet="ProjectImages1" />
+    </AssociationSet>
+    <AssociationSet Name="ProductSpecification" Association="CustomLightDbModel.Store.ProductSpecification">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Specification" EntitySet="Specifications" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Categories">
@@ -67,7 +58,7 @@
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="Updated" Type="datetime" Nullable="false" />
   </EntityType>
-  <EntityType Name="Images">
+  <EntityType Name="ProjectImages1">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -76,6 +67,7 @@
     <Property Name="ImageMimeType" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="Updated" Type="datetime" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Pages">
     <Key>
@@ -131,6 +123,7 @@
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="Updated" Type="datetime" Nullable="false" />
     <Property Name="Product_Id" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -142,20 +135,23 @@
     <Property Name="version" Type="int" Nullable="true" />
     <Property Name="definition" Type="varbinary(max)" Nullable="true" />
   </EntityType>
+  <EntityType Name="ProductImages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImageData" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ImageMimeType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="Updated" Type="datetime" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="ProductCategories">
     <Key>
       <PropertyRef Name="Categories_Id" />
       <PropertyRef Name="Products_Id" />
     </Key>
     <Property Name="Categories_Id" Type="int" Nullable="false" />
-    <Property Name="Products_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ProductImages">
-    <Key>
-      <PropertyRef Name="Images_Id" />
-      <PropertyRef Name="Products_Id" />
-    </Key>
-    <Property Name="Images_Id" Type="int" Nullable="false" />
     <Property Name="Products_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ProjectCategories">
@@ -166,23 +162,45 @@
     <Property Name="Categories_Id" Type="int" Nullable="false" />
     <Property Name="Projects_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="ProjectImages">
-    <Key>
-      <PropertyRef Name="Images_Id" />
-      <PropertyRef Name="Projects_Id" />
-    </Key>
-    <Property Name="Images_Id" Type="int" Nullable="false" />
-    <Property Name="Projects_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_Specifications_Products">
-    <End Role="Products" Type="CustomLightDbModel.Store.Products" Multiplicity="1" />
-    <End Role="Specifications" Type="CustomLightDbModel.Store.Specifications" Multiplicity="*" />
+  <Association Name="ProductProductImage">
+    <End Role="Product" Type="CustomLightDbModel.Store.Products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProductImage" Type="CustomLightDbModel.Store.ProductImages" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Products">
+      <Principal Role="Product">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Specifications">
-        <PropertyRef Name="Product_Id" />
+      <Dependent Role="ProductImage">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectProjectImage">
+    <End Role="Project" Type="CustomLightDbModel.Store.Projects" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProjectImage" Type="CustomLightDbModel.Store.ProjectImages1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProjectImage">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductSpecification">
+    <End Role="Product" Type="CustomLightDbModel.Store.Products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Specification" Type="CustomLightDbModel.Store.Specifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Specification">
+        <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -206,30 +224,6 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ProductCategories">
-        <PropertyRef Name="Products_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ProductImages_Images">
-    <End Role="Images" Type="CustomLightDbModel.Store.Images" Multiplicity="1" />
-    <End Role="ProductImages" Type="CustomLightDbModel.Store.ProductImages" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Images">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ProductImages">
-        <PropertyRef Name="Images_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ProductImages_Products">
-    <End Role="ProductImages" Type="CustomLightDbModel.Store.ProductImages" Multiplicity="*" />
-    <End Role="Products" Type="CustomLightDbModel.Store.Products" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Products">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ProductImages">
         <PropertyRef Name="Products_Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -258,30 +252,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ProjectImages_Images">
-    <End Role="Images" Type="CustomLightDbModel.Store.Images" Multiplicity="1" />
-    <End Role="ProjectImages" Type="CustomLightDbModel.Store.ProjectImages" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Images">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ProjectImages">
-        <PropertyRef Name="Images_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ProjectImages_Projects">
-    <End Role="ProjectImages" Type="CustomLightDbModel.Store.ProjectImages" Multiplicity="*" />
-    <End Role="Projects" Type="CustomLightDbModel.Store.Projects" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Projects">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ProjectImages">
-        <PropertyRef Name="Projects_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -301,7 +271,7 @@
           <NavigationProperty Name="Products" Relationship="Self.ProductCategories" FromRole="Categories" ToRole="Products" />
           <NavigationProperty Name="Projects" Relationship="Self.ProjectCategories" FromRole="Categories" ToRole="Projects" />
         </EntityType>
-        <EntityType Name="Image">
+        <EntityType Name="ProjectImage">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -310,8 +280,8 @@
           <Property Name="ImageMimeType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Products" Relationship="Self.ProductImages" FromRole="Images" ToRole="Products" />
-          <NavigationProperty Name="Projects" Relationship="Self.ProjectImages" FromRole="Images" ToRole="Projects" />
+          <NavigationProperty Name="Project" Relationship="CustomLightDbModel.ProjectProjectImage" FromRole="ProjectImage" ToRole="Project" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Page">
           <Key>
@@ -337,9 +307,9 @@
           <Property Name="IsPublished" Type="Boolean" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Specifications" Relationship="Self.FK_Specifications_Products" FromRole="Products" ToRole="Specifications" />
           <NavigationProperty Name="Categories" Relationship="Self.ProductCategories" FromRole="Products" ToRole="Categories" />
-          <NavigationProperty Name="Images" Relationship="Self.ProductImages" FromRole="Products" ToRole="Images" />
+          <NavigationProperty Name="ProductImages" Relationship="CustomLightDbModel.ProductProductImage" FromRole="Product" ToRole="ProductImage" />
+          <NavigationProperty Name="Specifications" Relationship="CustomLightDbModel.ProductSpecification" FromRole="Product" ToRole="Specification" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -355,7 +325,7 @@
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="Categories" Relationship="Self.ProjectCategories" FromRole="Projects" ToRole="Categories" />
-          <NavigationProperty Name="Images" Relationship="Self.ProjectImages" FromRole="Projects" ToRole="Images" />
+          <NavigationProperty Name="ProjectImages" Relationship="CustomLightDbModel.ProjectProjectImage" FromRole="Project" ToRole="ProjectImage" />
         </EntityType>
         <EntityType Name="Specification">
           <Key>
@@ -372,7 +342,8 @@
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Product_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Specifications_Products" FromRole="Specifications" ToRole="Products" />
+          <NavigationProperty Name="Product" Relationship="CustomLightDbModel.ProductSpecification" FromRole="Specification" ToRole="Product" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -384,63 +355,98 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_Specifications_Products">
-          <End Role="Products" Type="Self.Product" Multiplicity="1" />
-          <End Role="Specifications" Type="Self.Specification" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Specifications">
-              <PropertyRef Name="Product_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="ProductCategories">
           <End Role="Categories" Type="Self.Category" Multiplicity="*" />
-          <End Role="Products" Type="Self.Product" Multiplicity="*" />
-        </Association>
-        <Association Name="ProductImages">
-          <End Role="Images" Type="Self.Image" Multiplicity="*" />
           <End Role="Products" Type="Self.Product" Multiplicity="*" />
         </Association>
         <Association Name="ProjectCategories">
           <End Role="Categories" Type="Self.Category" Multiplicity="*" />
           <End Role="Projects" Type="Self.Project" Multiplicity="*" />
         </Association>
-        <Association Name="ProjectImages">
-          <End Role="Images" Type="Self.Image" Multiplicity="*" />
-          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="Images" EntityType="Self.Image" />
+          <EntitySet Name="ProjectImages1" EntityType="CustomLightDbModel.ProjectImage" />
           <EntitySet Name="Pages" EntityType="Self.Page" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Projects" EntityType="Self.Project" />
           <EntitySet Name="Specifications" EntityType="Self.Specification" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <AssociationSet Name="FK_Specifications_Products" Association="Self.FK_Specifications_Products">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="Specifications" EntitySet="Specifications" />
-          </AssociationSet>
           <AssociationSet Name="ProductCategories" Association="Self.ProductCategories">
             <End Role="Categories" EntitySet="Categories" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="ProductImages" Association="Self.ProductImages">
-            <End Role="Images" EntitySet="Images" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="ProjectCategories" Association="Self.ProjectCategories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Projects" EntitySet="Projects" />
           </AssociationSet>
-          <AssociationSet Name="ProjectImages" Association="Self.ProjectImages">
-            <End Role="Images" EntitySet="Images" />
-            <End Role="Projects" EntitySet="Projects" />
+          <EntitySet Name="ProductImages" EntityType="CustomLightDbModel.ProductImage" />
+          <AssociationSet Name="ProductProductImage" Association="CustomLightDbModel.ProductProductImage">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductImage" EntitySet="ProductImages" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectProjectImage" Association="CustomLightDbModel.ProjectProjectImage">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ProjectImage" EntitySet="ProjectImages1" />
+          </AssociationSet>
+          <AssociationSet Name="ProductSpecification" Association="CustomLightDbModel.ProductSpecification">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Specification" EntitySet="Specifications" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ProductImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageData" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ImageMimeType" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Updated" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Product" Relationship="CustomLightDbModel.ProductProductImage" FromRole="ProductImage" ToRole="Product" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ProductProductImage">
+          <End Type="CustomLightDbModel.Product" Role="Product" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CustomLightDbModel.ProductImage" Role="ProductImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductImage">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjectProjectImage">
+          <End Type="CustomLightDbModel.Project" Role="Project" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CustomLightDbModel.ProjectImage" Role="ProjectImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectImage">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductSpecification">
+          <End Type="CustomLightDbModel.Product" Role="Product" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CustomLightDbModel.Specification" Role="Specification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Specification">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -461,14 +467,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Images">
-      <EntityTypeMapping TypeName="IsTypeOf(CustomLightDbModel.Image)">
-        <MappingFragment StoreEntitySet="Images">
+    <EntitySetMapping Name="ProjectImages1">
+      <EntityTypeMapping TypeName="IsTypeOf(CustomLightDbModel.ProjectImage)">
+        <MappingFragment StoreEntitySet="ProjectImages1">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ImageData" ColumnName="ImageData" />
           <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
           <ScalarProperty Name="Created" ColumnName="Created" />
           <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -528,6 +535,7 @@
           <ScalarProperty Name="Created" ColumnName="Created" />
           <ScalarProperty Name="Updated" ColumnName="Updated" />
           <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -542,6 +550,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProductImages">
+      <EntityTypeMapping TypeName="IsTypeOf(CustomLightDbModel.ProductImage)">
+        <MappingFragment StoreEntitySet="ProductImages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+          <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="ProductCategories" TypeName="CustomLightDbModel.ProductCategories" StoreEntitySet="ProductCategories">
       <EndProperty Name="Categories">
         <ScalarProperty Name="Id" ColumnName="Categories_Id" />
@@ -550,25 +570,9 @@
         <ScalarProperty Name="Id" ColumnName="Products_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="ProductImages" TypeName="CustomLightDbModel.ProductImages" StoreEntitySet="ProductImages">
-      <EndProperty Name="Images">
-        <ScalarProperty Name="Id" ColumnName="Images_Id" />
-      </EndProperty>
-      <EndProperty Name="Products">
-        <ScalarProperty Name="Id" ColumnName="Products_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="ProjectCategories" TypeName="CustomLightDbModel.ProjectCategories" StoreEntitySet="ProjectCategories">
       <EndProperty Name="Categories">
         <ScalarProperty Name="Id" ColumnName="Categories_Id" />
-      </EndProperty>
-      <EndProperty Name="Projects">
-        <ScalarProperty Name="Id" ColumnName="Projects_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="ProjectImages" TypeName="CustomLightDbModel.ProjectImages" StoreEntitySet="ProjectImages">
-      <EndProperty Name="Images">
-        <ScalarProperty Name="Id" ColumnName="Images_Id" />
       </EndProperty>
       <EndProperty Name="Projects">
         <ScalarProperty Name="Id" ColumnName="Projects_Id" />

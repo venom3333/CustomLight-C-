@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Title</title>
+
+	<link rel="icon" href="@Url.Content("~/Content/imgs/favicon.ico")" />
+
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+	<header>
+		@Html.Partial("~/Views/common/_Header.cshtml")
+	</header>
+	<div>
+		@RenderBody()
+	</div>
+	<footer>
+		@Html.Partial("~/Views/common/_Footer.cshtml")
+	</footer>
+</body>
+</html>

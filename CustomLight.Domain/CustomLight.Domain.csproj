@@ -88,16 +88,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CustomLightDbModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Image.cs">
-      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Page.cs">
       <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProductImage.cs">
+      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Project.cs">
+      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectImage.cs">
       <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

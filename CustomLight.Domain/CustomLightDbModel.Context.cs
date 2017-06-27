@@ -16,7 +16,7 @@ namespace CustomLight.Domain
     public partial class Entities : DbContext
     {
         public Entities()
-            : base("name=CustomLightEntities")
+            : base("name=Entities")
         {
         }
     
@@ -26,11 +26,12 @@ namespace CustomLight.Domain
         }
     
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<ProjectImage> ProjectImages1 { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Specification> Specifications { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<ProductImage> ProductImages { get; set; }
     }
 }

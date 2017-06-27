@@ -5,18 +5,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5938285ad4b1495780d6aea329de78c5" Name="Diagram1">
-        <EntityTypeShape EntityType="CustomLightDbModel.Category" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightDbModel.Image" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightDbModel.Page" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightDbModel.Product" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightDbModel.Project" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightDbModel.Specification" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightDbModel.sysdiagram" Width="1.5" PointX="7.75" PointY="8.875" IsExpanded="true" />
-        <AssociationConnector Association="CustomLightDbModel.FK_Specifications_Products" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CustomLightDbModel.Category" Width="1.5" PointX="7.625" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightDbModel.ProjectImage" Width="1.5" PointX="13.125" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightDbModel.Page" Width="1.5" PointX="2" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightDbModel.Product" Width="1.5" PointX="7.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightDbModel.Project" Width="1.5" PointX="10.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightDbModel.Specification" Width="1.5" PointX="4.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightDbModel.sysdiagram" Width="1.5" PointX="13.625" PointY="8.625" IsExpanded="true" />
         <AssociationConnector Association="CustomLightDbModel.ProductCategories" ManuallyRouted="false" />
-        <AssociationConnector Association="CustomLightDbModel.ProductImages" ManuallyRouted="false" />
         <AssociationConnector Association="CustomLightDbModel.ProjectCategories" ManuallyRouted="false" />
-        <AssociationConnector Association="CustomLightDbModel.ProjectImages" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CustomLightDbModel.ProductImage" Width="1.5" PointX="11.25" PointY="6.25" />
+        <AssociationConnector Association="CustomLightDbModel.ProductProductImage" />
+        <AssociationConnector Association="CustomLightDbModel.ProjectProjectImage" />
+        <AssociationConnector Association="CustomLightDbModel.ProductSpecification" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,7 +18,7 @@ namespace CustomLight.Domain
         public Project()
         {
             this.Categories = new HashSet<Category>();
-            this.Images = new HashSet<Image>();
+            this.ProjectImages = new HashSet<ProjectImage>();
         }
     
         public int Id { get; set; }
@@ -34,6 +34,6 @@ namespace CustomLight.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Category> Categories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Images { get; set; }
+        public virtual ICollection<ProjectImage> ProjectImages { get; set; }
     }
 }

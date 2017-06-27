@@ -1,19 +1,54 @@
 ﻿@{
-	Layout = "~/Views/_Layouts/Main.cshtml";
+	Layout = "~/Views/_Layouts/_Home.cshtml";
 }
 
+<!-- Слайдер -->
+@*<? include_once APP . "/views/" . TEMPLATE . "/common/slider.tpl.php" ?>*@
+<!-- /Слайдер -->
+<!--Контент-->
 <div class="container">
-	
+	<div class="col-md-12 product-model-sec">
 		@foreach (CustomLight.Domain.Category item in ViewBag.Categories)
 		{
-			<div class="col-lg-3">
-				<p>@item.Name</p>
-				<p>@item.Created</p>
-				<p>@item.Updated</p>
-				<p>@item.Description</p>
-				<p>@item.ShortDescription</p>
-			</div>
-				
+		<div class="product-grid col-lg-3 col-md-4 col-sm-6">
+			<a href="/category/@item.Id">
+				<div class="product-img b-link-stripe b-animate-go  thickbox">
+					<img src="@Url.Action("GetCategoryIcon", "Home", new { Id = item.Id })" class="img-responsive" alt="">
+				</div>
+				<h5>@item.Name</h5>
+
+				<!--					<div class="product-info simpleCart_shelfItem">-->
+				<!--						<div class="product-info-cust prt_name">-->
+				<!--							<p>-->@item.ShortDescription<!--</p>-->
+				<!--							<div class="clearfix"></div>-->
+				<!--						</div>-->
+				<!--					</div>-->
+			</a>
+		</div>
 		}
+	</div>
 </div>
+<div class="about-main col-md-8 col-md-offset-2">
+	<h3>О компании:</h3>
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, blanditiis consequatur
+		corporis eligendi esse exercitationem iusto libero necessitatibus nemo obcaecati perferendis placeat quam
+		rerum
+		similique soluta sunt temporibus veritatis vitae.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, blanditiis consequatur corporis
+		eligendi esse
+		exercitationem iusto libero necessitatibus nemo obcaecati perferendis placeat quam rerum similique soluta
+		sunt
+		temporibus veritatis vitae.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, blanditiis consequatur corporis
+		eligendi
+		esse exercitationem iusto libero necessitatibus nemo obcaecati perferendis placeat quam rerum similique
+		soluta
+		sunt temporibus veritatis vitae.
+	</p>
+</div>
+<div class="clearfix"></div>
+<!--/Контент-->
 

@@ -129,6 +129,36 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\imgs\abstract-back-dark.svg" />
+    <Content Include="Content\imgs\abstract-back-medium.svg" />
+    <Content Include="Content\imgs\abstract-back.svg" />
+    <Content Include="Content\imgs\bnr.jpg" />
+    <Content Include="Content\imgs\bnr2.jpg" />
+    <Content Include="Content\imgs\bnr3.jpg" />
+    <Content Include="Content\imgs\cd-icon-close.svg" />
+    <Content Include="Content\imgs\favicon.ico" />
+    <Content Include="Content\imgs\icons\icon_1.jpg" />
+    <Content Include="Content\imgs\icons\icon_2.jpg" />
+    <Content Include="Content\imgs\icons\icon_3.jpg" />
+    <Content Include="Content\imgs\icons\icon_4.jpg" />
+    <Content Include="Content\imgs\icons\icon_5.jpg" />
+    <Content Include="Content\imgs\icons\icon_6.jpg" />
+    <Content Include="Content\imgs\icons\icon_7.jpg" />
+    <Content Include="Content\imgs\icons\icon_8.jpg" />
+    <Content Include="Content\imgs\сustomlight-logo-w.svg" />
+    <Content Include="Content\imgs\сustomlight-logo.svg" />
+    <Content Include="Content\sass\admin.css">
+      <DependentUpon>admin.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\admin.min.css">
+      <DependentUpon>admin.css</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\base.css">
+      <DependentUpon>base.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\base.min.css">
+      <DependentUpon>base.css</DependentUpon>
+    </Content>
     <Content Include="Content\site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -142,6 +172,17 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\sass\admin.scss" />
+    <Content Include="Content\sass\base.scss" />
+    <Content Include="Content\sass\_cart.scss" />
+    <Content Include="Content\sass\_footer.scss" />
+    <Content Include="Content\sass\_header.scss" />
+    <Content Include="Content\sass\_leftnav.scss" />
+    <Content Include="Content\sass\_send.scss" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -168,7 +209,7 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Views\_Layouts\Main.cshtml" />
+    <Content Include="Views\_Layouts\_Main.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
@@ -176,6 +217,7 @@
     <Content Include="Views\common\_Footer.cshtml" />
     <Content Include="Views\common\_MainMenu.cshtml" />
     <Content Include="Views\common\_SideMenu.cshtml" />
+    <Content Include="Views\_Layouts\_Home.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -224,7 +266,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\BuildWebCompiler.1.11.326\build\BuildWebCompiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildWebCompiler.1.11.326\build\BuildWebCompiler.targets'))" />
   </Target>
+  <Import Project="..\packages\BuildWebCompiler.1.11.326\build\BuildWebCompiler.targets" Condition="Exists('..\packages\BuildWebCompiler.1.11.326\build\BuildWebCompiler.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

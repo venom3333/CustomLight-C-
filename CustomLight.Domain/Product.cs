@@ -17,9 +17,9 @@ namespace CustomLight.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.Specifications = new HashSet<Specification>();
             this.Categories = new HashSet<Category>();
-            this.Images = new HashSet<Image>();
+            this.ProductImages = new HashSet<ProductImage>();
+            this.Specifications = new HashSet<Specification>();
         }
     
         public int Id { get; set; }
@@ -33,10 +33,10 @@ namespace CustomLight.Domain
         public System.DateTime Updated { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Specification> Specifications { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Category> Categories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Images { get; set; }
+        public virtual ICollection<ProductImage> ProductImages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Specification> Specifications { get; set; }
     }
 }

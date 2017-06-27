@@ -26,8 +26,9 @@ namespace CustomLight.WebUI.App_Start
 					  "~/Scripts/bootstrap.js"));
 
 			bundles.Add(new StyleBundle("~/Content/css").Include(
-					  "~/Content/bootstrap.css",
-					  "~/Content/site.css"));
+					  "~/Content/bootstrap.min.css",
+					  "~/Content/sass/base.min.css",
+					  "~/Content/sass/admin.min.css"));
 		}
 	}
 }
