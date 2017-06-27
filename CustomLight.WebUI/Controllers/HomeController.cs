@@ -23,7 +23,7 @@ namespace CustomLight.WebUI.Controllers
 				//}
 				//db.SaveChanges();
 				this.Categories = db.Categories.ToList();
-				// Пробное изменение для git
+				// Пробное изменение для git22222
 			}
 		}
 
