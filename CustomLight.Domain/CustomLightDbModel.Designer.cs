@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "D:\vsProjects\c#\web\CustomLight\CustomLight.Domain\CustomLightDbModel.edmx" включено. 
+﻿// Создание кода T4 для модели "D:\Work\VisualStudio\cl\CustomLight.Domain\CustomLightDbModel.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

@@ -17,11 +17,8 @@ namespace CustomLight.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-			var now = DateTime.Now;
             this.Products = new HashSet<Product>();
             this.Projects = new HashSet<Project>();
-			this.Created = now;
-			this.Updated = now;
         }
     
         public int Id { get; set; }
