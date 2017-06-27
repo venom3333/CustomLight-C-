@@ -105,13 +105,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CustomLight.Domain\CustomLight.Domain.csproj">
-      <Project>{192ba65e-f19d-421d-8710-1b08921cab4f}</Project>
-      <Name>CustomLight.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CustomLight.WebUI\CustomLight.WebUI.csproj">
+    <ProjectReference Include="..\CustomLight\CustomLight.csproj">
       <Project>{b2103dca-b783-4e47-a6e8-999a4a013424}</Project>
-      <Name>CustomLight.WebUI</Name>
+      <Name>CustomLight</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
