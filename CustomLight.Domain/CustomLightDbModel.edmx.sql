@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/27/2017 15:39:01
--- Generated from EDMX file: D:\Work\VisualStudio\cl\CustomLight.Domain\CustomLightDbModel.edmx
+-- Date Created: 06/27/2017 17:09:02
+-- Generated from EDMX file: D:\vsProjects\c#\web\CustomLight\CustomLight.Domain\CustomLightDbModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,9 +17,6 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_Specifications_Products]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Specifications] DROP CONSTRAINT [FK_Specifications_Products];
-GO
 IF OBJECT_ID(N'[dbo].[FK_ProductCategories_Categories]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ProductCategories] DROP CONSTRAINT [FK_ProductCategories_Categories];
 GO
@@ -32,6 +29,15 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ProjectCategories_Projects]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ProjectCategories] DROP CONSTRAINT [FK_ProjectCategories_Projects];
 GO
+IF OBJECT_ID(N'[dbo].[FK_ProductProductImage]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProductImages] DROP CONSTRAINT [FK_ProductProductImage];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProjectProjectImage]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProjectImages] DROP CONSTRAINT [FK_ProjectProjectImage];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductSpecification]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Specifications] DROP CONSTRAINT [FK_ProductSpecification];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -40,8 +46,8 @@ GO
 IF OBJECT_ID(N'[dbo].[Categories]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Categories];
 GO
-IF OBJECT_ID(N'[dbo].[Images]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Images];
+IF OBJECT_ID(N'[dbo].[ProjectImages]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProjectImages];
 GO
 IF OBJECT_ID(N'[dbo].[Pages]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Pages];
@@ -57,6 +63,9 @@ IF OBJECT_ID(N'[dbo].[Specifications]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[sysdiagrams]', 'U') IS NOT NULL
     DROP TABLE [dbo].[sysdiagrams];
+GO
+IF OBJECT_ID(N'[dbo].[ProductImages]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProductImages];
 GO
 IF OBJECT_ID(N'[dbo].[ProductCategories]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ProductCategories];
@@ -82,8 +91,8 @@ CREATE TABLE [dbo].[Categories] (
 );
 GO
 
--- Creating table 'ProjectImages1'
-CREATE TABLE [dbo].[ProjectImages1] (
+-- Creating table 'ProjectImages'
+CREATE TABLE [dbo].[ProjectImages] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [ImageData] varbinary(max)  NOT NULL,
     [ImageMimeType] nvarchar(max)  NOT NULL,
@@ -144,7 +153,6 @@ CREATE TABLE [dbo].[Specifications] (
     [Price] float  NOT NULL,
     [Created] datetime  NOT NULL,
     [Updated] datetime  NOT NULL,
-    [Product_Id] int  NOT NULL,
     [ProductId] int  NOT NULL
 );
 GO
@@ -167,6 +175,39 @@ CREATE TABLE [dbo].[ProductImages] (
     [Created] datetime  NOT NULL,
     [Updated] datetime  NOT NULL,
     [ProductId] int  NOT NULL
+);
+GO
+
+-- Creating table 'Slides'
+CREATE TABLE [dbo].[Slides] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [ImageData] varbinary(max)  NOT NULL,
+    [ImageMimeType] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [Description] nvarchar(max)  NOT NULL,
+    [Created] datetime  NOT NULL,
+    [Updated] datetime  NOT NULL
+);
+GO
+
+-- Creating table 'Essentials'
+CREATE TABLE [dbo].[Essentials] (
+    [Id] int  NOT NULL,
+    [Title] nvarchar(max)  NOT NULL,
+    [LogoImageData] varbinary(max)  NOT NULL,
+    [LogoImageMimeType] nvarchar(max)  NOT NULL,
+    [About] nvarchar(max)  NOT NULL,
+    [Address] nvarchar(max)  NOT NULL,
+    [Phone] nvarchar(max)  NOT NULL,
+    [Boss] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Orders'
+CREATE TABLE [dbo].[Orders] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [OrderString] nvarchar(max)  NOT NULL,
+    [Created] datetime  NOT NULL
 );
 GO
 
@@ -194,9 +235,9 @@ ADD CONSTRAINT [PK_Categories]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ProjectImages1'
-ALTER TABLE [dbo].[ProjectImages1]
-ADD CONSTRAINT [PK_ProjectImages1]
+-- Creating primary key on [Id] in table 'ProjectImages'
+ALTER TABLE [dbo].[ProjectImages]
+ADD CONSTRAINT [PK_ProjectImages]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -233,6 +274,24 @@ GO
 -- Creating primary key on [Id] in table 'ProductImages'
 ALTER TABLE [dbo].[ProductImages]
 ADD CONSTRAINT [PK_ProductImages]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Slides'
+ALTER TABLE [dbo].[Slides]
+ADD CONSTRAINT [PK_Slides]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Essentials'
+ALTER TABLE [dbo].[Essentials]
+ADD CONSTRAINT [PK_Essentials]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Orders'
+ALTER TABLE [dbo].[Orders]
+ADD CONSTRAINT [PK_Orders]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -315,8 +374,8 @@ ON [dbo].[ProductImages]
     ([ProductId]);
 GO
 
--- Creating foreign key on [ProjectId] in table 'ProjectImages1'
-ALTER TABLE [dbo].[ProjectImages1]
+-- Creating foreign key on [ProjectId] in table 'ProjectImages'
+ALTER TABLE [dbo].[ProjectImages]
 ADD CONSTRAINT [FK_ProjectProjectImage]
     FOREIGN KEY ([ProjectId])
     REFERENCES [dbo].[Projects]
@@ -326,7 +385,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProjectProjectImage'
 CREATE INDEX [IX_FK_ProjectProjectImage]
-ON [dbo].[ProjectImages1]
+ON [dbo].[ProjectImages]
     ([ProjectId]);
 GO
 

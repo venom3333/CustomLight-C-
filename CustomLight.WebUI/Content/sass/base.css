@@ -1,6 +1,6 @@
 ﻿html, body {
   height: 100%;
-  background-image: url(../imgs/abstract-back-dark.svg);
+  background-image: url(/content/imgs/abstract-back-dark.svg);
   background-size: 150%; }
 
 .cart-button:hover, .cart-delete-button:hover, .cart-update-button:hover {

@@ -8,18 +8,18 @@
 <!--Контент-->
 <div class="container">
 	<div class="col-md-12 product-model-sec">
-		@foreach (CustomLight.Domain.Category item in ViewBag.Categories)
+		@foreach (CustomLight.Domain.Category category in ViewBag.Categories)
 		{
 		<div class="product-grid col-lg-3 col-md-4 col-sm-6">
-			<a href="/category/@item.Id">
+			<a href="/Categories/Details/@category.Id">
 				<div class="product-img b-link-stripe b-animate-go  thickbox">
-					<img src="@Url.Action("GetCategoryIcon", "Home", new { Id = item.Id })" class="img-responsive" alt="">
+					<img src="@Url.Action("GetCategoryIcon", "Categories", new { Id = category.Id })" class="img-responsive" alt="">
 				</div>
-				<h5>@item.Name</h5>
+				<h5>@category.Name</h5>
 
-				<!--					<div class="product-info simpleCart_shelfItem">-->
+				<!--					<div class="product-info simpleCart_shelfcategory">-->
 				<!--						<div class="product-info-cust prt_name">-->
-				<!--							<p>-->@item.ShortDescription<!--</p>-->
+				<!--							<p>-->@category.ShortDescription<!--</p>-->
 				<!--							<div class="clearfix"></div>-->
 				<!--						</div>-->
 				<!--					</div>-->

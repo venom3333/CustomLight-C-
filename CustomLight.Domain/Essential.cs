@@ -12,20 +12,21 @@ namespace CustomLight.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Specification
+    public partial class Essential
     {
-        public int Id { get; set; }
-        public Nullable<int> Diameter { get; set; }
-        public Nullable<int> Length { get; set; }
-        public Nullable<int> Width { get; set; }
-        public Nullable<int> Height { get; set; }
-        public Nullable<int> Power { get; set; }
-        public Nullable<int> LightOutput { get; set; }
-        public double Price { get; set; }
-        public System.DateTime Created { get; set; }
-        public System.DateTime Updated { get; set; }
-        public int ProductId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Essential()
+        {
+            this.Id = 1;
+        }
     
-        public virtual Product Product { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public byte[] LogoImageData { get; set; }
+        public string LogoImageMimeType { get; set; }
+        public string About { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Boss { get; set; }
     }
 }

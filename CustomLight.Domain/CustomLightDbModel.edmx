@@ -7,13 +7,16 @@
     <Schema Namespace="CustomLightDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="CustomLightDbModelStoreContainer">
     <EntitySet Name="Categories" EntityType="CustomLightDbModel.Store.Categories" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ProjectImages1" EntityType="CustomLightDbModel.Store.ProjectImages1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProjectImages" EntityType="CustomLightDbModel.Store.ProjectImages" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Pages" EntityType="CustomLightDbModel.Store.Pages" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Products" EntityType="CustomLightDbModel.Store.Products" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Projects" EntityType="CustomLightDbModel.Store.Projects" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Specifications" EntityType="CustomLightDbModel.Store.Specifications" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="sysdiagrams" EntityType="CustomLightDbModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProductImages" EntityType="CustomLightDbModel.Store.ProductImages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Slides" EntityType="CustomLightDbModel.Store.Slides" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Essentials" EntityType="CustomLightDbModel.Store.Essentials" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="CustomLightDbModel.Store.Orders" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProductCategories" EntityType="CustomLightDbModel.Store.ProductCategories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProjectCategories" EntityType="CustomLightDbModel.Store.ProjectCategories" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ProductCategories_Categories" Association="CustomLightDbModel.Store.FK_ProductCategories_Categories">
@@ -38,7 +41,7 @@
     </AssociationSet>
     <AssociationSet Name="ProjectProjectImage" Association="CustomLightDbModel.Store.ProjectProjectImage">
       <End Role="Project" EntitySet="Projects" />
-      <End Role="ProjectImage" EntitySet="ProjectImages1" />
+      <End Role="ProjectImage" EntitySet="ProjectImages" />
     </AssociationSet>
     <AssociationSet Name="ProductSpecification" Association="CustomLightDbModel.Store.ProductSpecification">
       <End Role="Product" EntitySet="Products" />
@@ -58,7 +61,7 @@
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="Updated" Type="datetime" Nullable="false" />
   </EntityType>
-  <EntityType Name="ProjectImages1">
+  <EntityType Name="ProjectImages">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -122,7 +125,6 @@
     <Property Name="Price" Type="float" Nullable="false" />
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="Updated" Type="datetime" Nullable="false" />
-    <Property Name="Product_Id" Type="int" Nullable="false" />
     <Property Name="ProductId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
@@ -145,6 +147,39 @@
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="Updated" Type="datetime" Nullable="false" />
     <Property Name="ProductId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Slides">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImageData" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ImageMimeType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="Updated" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Essentials">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" DefaultValue="1" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LogoImageData" Type="varbinary(max)" Nullable="false" />
+    <Property Name="LogoImageMimeType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="About" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Boss" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderString" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ProductCategories">
     <Key>
@@ -180,7 +215,7 @@
     <End Role="Project" Type="CustomLightDbModel.Store.Projects" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="ProjectImage" Type="CustomLightDbModel.Store.ProjectImages1" Multiplicity="*" />
+    <End Role="ProjectImage" Type="CustomLightDbModel.Store.ProjectImages" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
         <PropertyRef Name="Id" />
@@ -341,7 +376,6 @@
           <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="Product_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="CustomLightDbModel.ProductSpecification" FromRole="Specification" ToRole="Product" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
         </EntityType>
@@ -365,7 +399,7 @@
         </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="ProjectImages1" EntityType="CustomLightDbModel.ProjectImage" />
+          <EntitySet Name="ProjectImages" EntityType="CustomLightDbModel.ProjectImage" />
           <EntitySet Name="Pages" EntityType="Self.Page" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Projects" EntityType="Self.Project" />
@@ -386,12 +420,15 @@
           </AssociationSet>
           <AssociationSet Name="ProjectProjectImage" Association="CustomLightDbModel.ProjectProjectImage">
             <End Role="Project" EntitySet="Projects" />
-            <End Role="ProjectImage" EntitySet="ProjectImages1" />
+            <End Role="ProjectImage" EntitySet="ProjectImages" />
           </AssociationSet>
           <AssociationSet Name="ProductSpecification" Association="CustomLightDbModel.ProductSpecification">
             <End Role="Product" EntitySet="Products" />
             <End Role="Specification" EntitySet="Specifications" />
           </AssociationSet>
+          <EntitySet Name="Slides" EntityType="CustomLightDbModel.Slide" />
+          <EntitySet Name="Essentials" EntityType="CustomLightDbModel.Essential" />
+          <EntitySet Name="Orders" EntityType="CustomLightDbModel.Order" />
         </EntityContainer>
         <EntityType Name="ProductImage">
           <Key>
@@ -447,6 +484,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Slide">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageData" Type="Binary" Nullable="false" />
+          <Property Name="ImageMimeType" Type="String" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" />
+          <Property Name="Updated" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Essential">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" DefaultValue="1" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <Property Name="LogoImageData" Type="Binary" Nullable="false" />
+          <Property Name="LogoImageMimeType" Type="String" Nullable="false" />
+          <Property Name="About" Type="String" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <Property Name="Phone" Type="String" Nullable="false" />
+          <Property Name="Boss" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderString" Type="String" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -467,9 +537,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProjectImages1">
+    <EntitySetMapping Name="ProjectImages">
       <EntityTypeMapping TypeName="IsTypeOf(CustomLightDbModel.ProjectImage)">
-        <MappingFragment StoreEntitySet="ProjectImages1">
+        <MappingFragment StoreEntitySet="ProjectImages">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ImageData" ColumnName="ImageData" />
           <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
@@ -534,7 +604,6 @@
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Created" ColumnName="Created" />
           <ScalarProperty Name="Updated" ColumnName="Updated" />
-          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -559,6 +628,42 @@
           <ScalarProperty Name="Created" ColumnName="Created" />
           <ScalarProperty Name="Updated" ColumnName="Updated" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Slides">
+      <EntityTypeMapping TypeName="IsTypeOf(CustomLightDbModel.Slide)">
+        <MappingFragment StoreEntitySet="Slides">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+          <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Essentials">
+      <EntityTypeMapping TypeName="IsTypeOf(CustomLightDbModel.Essential)">
+        <MappingFragment StoreEntitySet="Essentials">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="LogoImageData" ColumnName="LogoImageData" />
+          <ScalarProperty Name="LogoImageMimeType" ColumnName="LogoImageMimeType" />
+          <ScalarProperty Name="About" ColumnName="About" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Boss" ColumnName="Boss" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="IsTypeOf(CustomLightDbModel.Order)">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OrderString" ColumnName="OrderString" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
