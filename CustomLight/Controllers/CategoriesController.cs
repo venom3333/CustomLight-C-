@@ -137,7 +137,7 @@ namespace CustomLight.Controllers
 
 
 		[OutputCache(Duration = 3600, Location = OutputCacheLocation.Client, VaryByParam = "id")]
-		public FileContentResult GetCategoryIcon(int Id)
+		public FileContentResult GetCategoryIcon(int? Id)
 		{
 			Category cat = db.Categories
 				.FirstOrDefault(c => c.Id == Id);
@@ -150,38 +150,6 @@ namespace CustomLight.Controllers
 			{
 				return null;
 			}
-		}
-
-		/// <summary>
-		/// Тестовый метод, наполняет БД фейками
-		/// private чтобы случайно не запустить по URL
-		/// </summary>
-		private void TestFillDB()
-		{
-			TestFillCategories();
-		}
-
-		private void TestFillCategories()
-		{
-			for (int i = 0; i < 8; i++)
-			{
-				var filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content/imgs/icons/icon_" + (i + 1) + ".jpg");
-				byte[] iconData = System.IO.File.ReadAllBytes(filepath);
-				string iconMimeType = "image/jpg";
-				var now = DateTime.Now;
-				Category cat = new Category
-				{
-					Name = "Наименование_" + i,
-					Description = "Описание_" + i,
-					ShortDescription = "Краткое описание_" + i,
-					Icon = iconData,
-					IconMimeType = iconMimeType,
-					Created = now,
-					Updated = now,
-				};
-				db.Categories.Add(cat);
-			}
-			db.SaveChanges();
 		}
 	}
 }
