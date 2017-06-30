@@ -33,12 +33,12 @@ namespace CustomLight.Models
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductType> ProductTypes { get; set; }
         public virtual DbSet<ProjectImage> ProjectImages { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Slide> Slides { get; set; }
-        public virtual DbSet<ProductType> ProductTypes { get; set; }
-        public virtual DbSet<SpecificationValue> SpecificationValues { get; set; }
         public virtual DbSet<SpecificationTitle> SpecificationTitles { get; set; }
+        public virtual DbSet<SpecificationValue> SpecificationValues { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
