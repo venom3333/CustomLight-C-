@@ -17,8 +17,6 @@ namespace CustomLight.Models
         public int Id { get; set; }
         public byte[] ImageData { get; set; }
         public string ImageMimeType { get; set; }
-        public System.DateTime Created { get; set; }
-        public System.DateTime Updated { get; set; }
         public int ProjectId { get; set; }
     
         public virtual Project Project { get; set; }

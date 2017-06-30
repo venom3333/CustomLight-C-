@@ -7,20 +7,24 @@
       <Diagram DiagramId="df9d98351d7b4fecbb08416bae57cba3" Name="Diagram1">
         <EntityTypeShape EntityType="CustomLightModel.Category" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="CustomLightModel.Essential" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.Order" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.Page" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightModel.Order" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightModel.Page" Width="1.5" PointX="11.75" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CustomLightModel.ProductImage" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.Product" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.ProjectImage" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightModel.Product" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightModel.ProjectImage" PointX="5.25" PointY="9.125" Width="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CustomLightModel.Project" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CustomLightModel.Slide" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.Specification" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.sysdiagram" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="CustomLightModel.FK_ProductProductImage" ManuallyRouted="false" />
-        <AssociationConnector Association="CustomLightModel.FK_ProductSpecification" ManuallyRouted="false" />
-        <AssociationConnector Association="CustomLightModel.FK_ProjectProjectImage" ManuallyRouted="false" />
-        <AssociationConnector Association="CustomLightModel.ProductCategories" ManuallyRouted="false" />
-        <AssociationConnector Association="CustomLightModel.ProjectCategories" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CustomLightModel.ProductType" Width="1.5" PointX="8.375" PointY="3.625" />
+        <EntityTypeShape EntityType="CustomLightModel.SpecificationValue" Width="1.5" PointX="9.875" PointY="6.75" />
+        <EntityTypeShape EntityType="CustomLightModel.SpecificationTitle" Width="1.5" PointX="7.25" PointY="6.625" />
+        <AssociationConnector Association="CustomLightModel.ProductSpecificationValue" />
+        <AssociationConnector Association="CustomLightModel.ProductTypeSpecificationTitle" />
+        <AssociationConnector Association="CustomLightModel.ProjectProjectImage" />
+        <AssociationConnector Association="CustomLightModel.ProductProductImage" />
+        <AssociationConnector Association="CustomLightModel.ProductTypeProduct" />
+        <AssociationConnector Association="CustomLightModel.CategoryProduct" />
+        <AssociationConnector Association="CustomLightModel.CategoryProject" />
+        <AssociationConnector Association="CustomLightModel.SpecificationTitleSpecificationValue" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

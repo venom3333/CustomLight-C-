@@ -261,6 +261,9 @@
     <Compile Include="Models\ProductImage.cs">
       <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductType.cs">
+      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Project.cs">
       <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
@@ -270,16 +273,16 @@
     <Compile Include="Models\Slide.cs">
       <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Specification.cs">
+    <Compile Include="Models\SpecificationTitle.cs">
+      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SpecificationValue.cs">
       <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
