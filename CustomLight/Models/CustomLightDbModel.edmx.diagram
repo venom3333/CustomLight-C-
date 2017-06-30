@@ -5,26 +5,26 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="df9d98351d7b4fecbb08416bae57cba3" Name="Diagram1">
-        <EntityTypeShape EntityType="CustomLightModel.Category" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.Essential" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.Order" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.Page" Width="1.5" PointX="11.75" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.ProductImage" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.Product" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.ProjectImage" PointX="5.25" PointY="9.125" Width="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.Project" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.Slide" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CustomLightModel.ProductType" Width="1.5" PointX="8.375" PointY="3.625" />
-        <EntityTypeShape EntityType="CustomLightModel.SpecificationValue" Width="1.5" PointX="9.875" PointY="6.75" />
-        <EntityTypeShape EntityType="CustomLightModel.SpecificationTitle" Width="1.5" PointX="7.25" PointY="6.625" />
+        <EntityTypeShape EntityType="CustomLightModel.Category" PointX="0.75" PointY="0.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightModel.Essential" PointX="9.75" PointY="2.5" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightModel.Order" PointX="7.75" PointY="8.5" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightModel.Page" PointX="7.75" PointY="5.5" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightModel.ProductImage" PointX="5.25" PointY="3.25" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightModel.Product" PointX="3" PointY="4.375" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightModel.ProjectImage" PointX="5.25" PointY="13.625" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightModel.Project" PointX="3" PointY="13.125" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightModel.Slide" PointX="7.75" PointY="2.5" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomLightModel.ProductType" PointX="0.75" PointY="5.375" Width="1.5" />
+        <EntityTypeShape EntityType="CustomLightModel.SpecificationValue" PointX="5.25" PointY="6.875" Width="1.5" />
+        <EntityTypeShape EntityType="CustomLightModel.SpecificationTitle" PointX="3" PointY="9.75" Width="1.5" />
         <AssociationConnector Association="CustomLightModel.ProductSpecificationValue" />
         <AssociationConnector Association="CustomLightModel.ProductTypeSpecificationTitle" />
-        <AssociationConnector Association="CustomLightModel.ProjectProjectImage" />
         <AssociationConnector Association="CustomLightModel.ProductProductImage" />
         <AssociationConnector Association="CustomLightModel.ProductTypeProduct" />
         <AssociationConnector Association="CustomLightModel.CategoryProduct" />
         <AssociationConnector Association="CustomLightModel.CategoryProject" />
         <AssociationConnector Association="CustomLightModel.SpecificationTitleSpecificationValue" />
+        <AssociationConnector Association="CustomLightModel.ProjectProjectImage" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
