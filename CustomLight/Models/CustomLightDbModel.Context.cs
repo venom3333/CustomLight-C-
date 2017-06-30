@@ -39,6 +39,7 @@ namespace CustomLight.Models
         public virtual DbSet<Slide> Slides { get; set; }
         public virtual DbSet<SpecificationTitle> SpecificationTitles { get; set; }
         public virtual DbSet<SpecificationValue> SpecificationValues { get; set; }
+        public virtual DbSet<Specification> Specifications { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

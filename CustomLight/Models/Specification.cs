@@ -12,14 +12,19 @@ namespace CustomLight.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SpecificationValue
+    public partial class Specification
     {
-        public int Id { get; set; }
-        public string Value { get; set; }
-        public int SpecificationTitleId { get; set; }
-        public int SpecificationId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Specification()
+        {
+            this.SpecificationValues = new HashSet<SpecificationValue>();
+        }
     
-        public virtual SpecificationTitle SpecificationTitle { get; set; }
-        public virtual Specification Specification { get; set; }
+        public int Id { get; set; }
+        public int ProductId { get; set; }
+    
+        public virtual Product Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SpecificationValue> SpecificationValues { get; set; }
     }
 }

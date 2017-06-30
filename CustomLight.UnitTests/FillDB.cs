@@ -124,8 +124,6 @@ namespace CustomLight.UnitTests
 					});
 				}
 
-
-
 				// Остальной объект
 				Product product = new Product
 				{
@@ -139,11 +137,23 @@ namespace CustomLight.UnitTests
 					IsPublished = true,
 					ProductImages = images,
 					ProductType = db.ProductTypes.FirstOrDefault(x => x.Name == pt),
-
-					// Спецификации
-					SpecificationValues = (db.SpecificationTitles.Where(st => st.ProductType.Name == pt).ToList())
-											.Select(t => new SpecificationValue { SpecificationTitleId = t.Id, Value = new Random().Next(10, 100).ToString() }).ToList()
 				};
+
+				// Спецификации
+				var specs = new List<Specification>();
+
+				for (int s = 0; s < 5; s++)
+				{
+					specs.Add
+						(
+							new Specification
+								{
+									SpecificationValues = (db.SpecificationTitles.Where(st => st.ProductType.Name == pt).ToList()).Select(t => new SpecificationValue { SpecificationTitleId = t.Id, Value = new Random().Next(10, 150).ToString() }).ToList(),
+								}
+						);
+				}
+				product.Specifications = specs;
+
 				db.Products.Add(product);
 			}
 			db.SaveChanges();

@@ -18,8 +18,8 @@ namespace CustomLight.Models
         public Product()
         {
             this.ProductImages = new HashSet<ProductImage>();
-            this.SpecificationValues = new HashSet<SpecificationValue>();
             this.Categories = new HashSet<Category>();
+            this.Specifications = new HashSet<Specification>();
         }
     
         public int Id { get; set; }
@@ -35,10 +35,10 @@ namespace CustomLight.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductImage> ProductImages { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SpecificationValue> SpecificationValues { get; set; }
         public virtual ProductType ProductType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Category> Categories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Specification> Specifications { get; set; }
     }
 }

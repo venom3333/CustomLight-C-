@@ -273,6 +273,9 @@
     <Compile Include="Models\Slide.cs">
       <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Specification.cs">
+      <DependentUpon>CustomLightDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SpecificationTitle.cs">
       <DependentUpon>CustomLightDbModel.tt</DependentUpon>
     </Compile>

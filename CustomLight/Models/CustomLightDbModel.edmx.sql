@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/30/2017 15:30:42
--- Generated from EDMX file: D:\Work\VisualStudio\cl\CustomLight\Models\CustomLightDbModel.edmx
+-- Date Created: 06/30/2017 18:17:23
+-- Generated from EDMX file: D:\vsProjects\c#\web\CustomLight\CustomLight\Models\CustomLightDbModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,23 +17,8 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_CategoryProduct_Category]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CategoryProduct] DROP CONSTRAINT [FK_CategoryProduct_Category];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CategoryProduct_Product]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CategoryProduct] DROP CONSTRAINT [FK_CategoryProduct_Product];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CategoryProject_Category]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CategoryProject] DROP CONSTRAINT [FK_CategoryProject_Category];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CategoryProject_Project]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CategoryProject] DROP CONSTRAINT [FK_CategoryProject_Project];
-GO
 IF OBJECT_ID(N'[dbo].[FK_ProductProductImage]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ProductImages] DROP CONSTRAINT [FK_ProductProductImage];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProductSpecificationValue]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SpecificationValues] DROP CONSTRAINT [FK_ProductSpecificationValue];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ProductTypeProduct]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Products] DROP CONSTRAINT [FK_ProductTypeProduct];
@@ -47,6 +32,24 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_SpecificationTitleSpecificationValue]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[SpecificationValues] DROP CONSTRAINT [FK_SpecificationTitleSpecificationValue];
 GO
+IF OBJECT_ID(N'[dbo].[FK_CategoryProduct_Category]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CategoryProduct] DROP CONSTRAINT [FK_CategoryProduct_Category];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CategoryProduct_Product]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CategoryProduct] DROP CONSTRAINT [FK_CategoryProduct_Product];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CategoryProject_Category]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CategoryProject] DROP CONSTRAINT [FK_CategoryProject_Category];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CategoryProject_Project]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CategoryProject] DROP CONSTRAINT [FK_CategoryProject_Project];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductSpecification]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Specifications] DROP CONSTRAINT [FK_ProductSpecification];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SpecificationSpecificationValue]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SpecificationValues] DROP CONSTRAINT [FK_SpecificationSpecificationValue];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -54,12 +57,6 @@ GO
 
 IF OBJECT_ID(N'[dbo].[Categories]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Categories];
-GO
-IF OBJECT_ID(N'[dbo].[CategoryProduct]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CategoryProduct];
-GO
-IF OBJECT_ID(N'[dbo].[CategoryProject]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CategoryProject];
 GO
 IF OBJECT_ID(N'[dbo].[Essentials]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Essentials];
@@ -93,6 +90,15 @@ IF OBJECT_ID(N'[dbo].[SpecificationTitles]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[SpecificationValues]', 'U') IS NOT NULL
     DROP TABLE [dbo].[SpecificationValues];
+GO
+IF OBJECT_ID(N'[dbo].[Specifications]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Specifications];
+GO
+IF OBJECT_ID(N'[dbo].[CategoryProduct]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CategoryProduct];
+GO
+IF OBJECT_ID(N'[dbo].[CategoryProject]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CategoryProject];
 GO
 
 -- --------------------------------------------------
@@ -220,8 +226,15 @@ GO
 CREATE TABLE [dbo].[SpecificationValues] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Value] nvarchar(max)  NOT NULL,
-    [ProductId] int  NOT NULL,
-    [SpecificationTitleId] int  NOT NULL
+    [SpecificationTitleId] int  NOT NULL,
+    [SpecificationId] int  NOT NULL
+);
+GO
+
+-- Creating table 'Specifications'
+CREATE TABLE [dbo].[Specifications] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [ProductId] int  NOT NULL
 );
 GO
 
@@ -315,6 +328,12 @@ ADD CONSTRAINT [PK_SpecificationValues]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'Specifications'
+ALTER TABLE [dbo].[Specifications]
+ADD CONSTRAINT [PK_Specifications]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- Creating primary key on [Categories_Id], [Products_Id] in table 'CategoryProduct'
 ALTER TABLE [dbo].[CategoryProduct]
 ADD CONSTRAINT [PK_CategoryProduct]
@@ -343,21 +362,6 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProductProductImage'
 CREATE INDEX [IX_FK_ProductProductImage]
 ON [dbo].[ProductImages]
-    ([ProductId]);
-GO
-
--- Creating foreign key on [ProductId] in table 'SpecificationValues'
-ALTER TABLE [dbo].[SpecificationValues]
-ADD CONSTRAINT [FK_ProductSpecificationValue]
-    FOREIGN KEY ([ProductId])
-    REFERENCES [dbo].[Products]
-        ([Id])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ProductSpecificationValue'
-CREATE INDEX [IX_FK_ProductSpecificationValue]
-ON [dbo].[SpecificationValues]
     ([ProductId]);
 GO
 
@@ -467,6 +471,36 @@ GO
 CREATE INDEX [IX_FK_CategoryProject_Project]
 ON [dbo].[CategoryProject]
     ([Projects_Id]);
+GO
+
+-- Creating foreign key on [ProductId] in table 'Specifications'
+ALTER TABLE [dbo].[Specifications]
+ADD CONSTRAINT [FK_ProductSpecification]
+    FOREIGN KEY ([ProductId])
+    REFERENCES [dbo].[Products]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProductSpecification'
+CREATE INDEX [IX_FK_ProductSpecification]
+ON [dbo].[Specifications]
+    ([ProductId]);
+GO
+
+-- Creating foreign key on [SpecificationId] in table 'SpecificationValues'
+ALTER TABLE [dbo].[SpecificationValues]
+ADD CONSTRAINT [FK_SpecificationSpecificationValue]
+    FOREIGN KEY ([SpecificationId])
+    REFERENCES [dbo].[Specifications]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SpecificationSpecificationValue'
+CREATE INDEX [IX_FK_SpecificationSpecificationValue]
+ON [dbo].[SpecificationValues]
+    ([SpecificationId]);
 GO
 
 -- --------------------------------------------------

@@ -11,20 +11,22 @@
         <EntityTypeShape EntityType="CustomLightModel.Page" Width="1.5" PointX="2.75" PointY="9" />
         <EntityTypeShape EntityType="CustomLightModel.ProductImage" Width="1.5" PointX="8.25" PointY="8.125" />
         <EntityTypeShape EntityType="CustomLightModel.Product" Width="1.5" PointX="6" PointY="4.375" />
-        <EntityTypeShape EntityType="CustomLightModel.ProductType" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="CustomLightModel.ProductType" Width="1.5" PointX="10.5" PointY="7.125" />
         <EntityTypeShape EntityType="CustomLightModel.ProjectImage" Width="1.5" PointX="8.25" PointY="11.625" />
         <EntityTypeShape EntityType="CustomLightModel.Project" Width="1.5" PointX="6" PointY="11.125" />
         <EntityTypeShape EntityType="CustomLightModel.Slide" Width="1.5" PointX="8.75" PointY="2" />
-        <EntityTypeShape EntityType="CustomLightModel.SpecificationTitle" Width="1.5" PointX="3" PointY="5.25" />
-        <EntityTypeShape EntityType="CustomLightModel.SpecificationValue" Width="1.5" PointX="8.25" PointY="5.125" />
+        <EntityTypeShape EntityType="CustomLightModel.SpecificationTitle" Width="1.5" PointX="12.625" PointY="6.5" />
+        <EntityTypeShape EntityType="CustomLightModel.SpecificationValue" Width="1.5" PointX="10.625" PointY="3.625" />
         <AssociationConnector Association="CustomLightModel.FK_ProductProductImage" />
-        <AssociationConnector Association="CustomLightModel.FK_ProductSpecificationValue" />
         <AssociationConnector Association="CustomLightModel.FK_ProductTypeProduct" />
         <AssociationConnector Association="CustomLightModel.FK_ProductTypeSpecificationTitle" />
         <AssociationConnector Association="CustomLightModel.FK_ProjectProjectImage" />
         <AssociationConnector Association="CustomLightModel.FK_SpecificationTitleSpecificationValue" />
         <AssociationConnector Association="CustomLightModel.CategoryProduct" />
         <AssociationConnector Association="CustomLightModel.CategoryProject" />
+        <EntityTypeShape EntityType="CustomLightModel.Specification" Width="1.5" PointX="8.25" PointY="5.125" />
+        <AssociationConnector Association="CustomLightModel.ProductSpecification" />
+        <AssociationConnector Association="CustomLightModel.SpecificationSpecificationValue" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,15 +18,12 @@
     <EntitySet Name="Slides" EntityType="CustomLightModel.Store.Slides" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SpecificationTitles" EntityType="CustomLightModel.Store.SpecificationTitles" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SpecificationValues" EntityType="CustomLightModel.Store.SpecificationValues" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Specifications" EntityType="CustomLightModel.Store.Specifications" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CategoryProduct" EntityType="CustomLightModel.Store.CategoryProduct" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CategoryProject" EntityType="CustomLightModel.Store.CategoryProject" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ProductProductImage" Association="CustomLightModel.Store.FK_ProductProductImage">
       <End Role="Product" EntitySet="Products" />
       <End Role="ProductImage" EntitySet="ProductImages" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProductSpecificationValue" Association="CustomLightModel.Store.FK_ProductSpecificationValue">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="SpecificationValue" EntitySet="SpecificationValues" />
     </AssociationSet>
     <AssociationSet Name="FK_ProductTypeProduct" Association="CustomLightModel.Store.FK_ProductTypeProduct">
       <End Role="ProductType" EntitySet="ProductTypes" />
@@ -59,6 +56,14 @@
     <AssociationSet Name="FK_CategoryProject_Project" Association="CustomLightModel.Store.FK_CategoryProject_Project">
       <End Role="Project" EntitySet="Projects" />
       <End Role="CategoryProject" EntitySet="CategoryProject" />
+    </AssociationSet>
+    <AssociationSet Name="ProductSpecification" Association="CustomLightModel.Store.ProductSpecification">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Specification" EntitySet="Specifications" />
+    </AssociationSet>
+    <AssociationSet Name="SpecificationSpecificationValue" Association="CustomLightModel.Store.SpecificationSpecificationValue">
+      <End Role="Specification" EntitySet="Specifications" />
+      <End Role="SpecificationValue" EntitySet="SpecificationValues" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Categories">
@@ -184,8 +189,15 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ProductId" Type="int" Nullable="false" />
     <Property Name="SpecificationTitleId" Type="int" Nullable="false" />
+    <Property Name="SpecificationId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Specifications">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CategoryProduct">
     <Key>
@@ -213,20 +225,6 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ProductImage">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ProductSpecificationValue">
-    <End Role="Product" Type="CustomLightModel.Store.Products" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="SpecificationValue" Type="CustomLightModel.Store.SpecificationValues" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SpecificationValue">
         <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
@@ -282,6 +280,34 @@
       </Principal>
       <Dependent Role="SpecificationValue">
         <PropertyRef Name="SpecificationTitleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductSpecification">
+    <End Role="Product" Type="CustomLightModel.Store.Products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Specification" Type="CustomLightModel.Store.Specifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Specification">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SpecificationSpecificationValue">
+    <End Role="Specification" Type="CustomLightModel.Store.Specifications" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SpecificationValue" Type="CustomLightModel.Store.SpecificationValues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specification">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SpecificationValue">
+        <PropertyRef Name="SpecificationId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -384,10 +410,6 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="ProductImage" EntitySet="ProductImages" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductSpecificationValue" Association="CustomLightModel.FK_ProductSpecificationValue">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="SpecificationValue" EntitySet="SpecificationValues" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProductTypeProduct" Association="CustomLightModel.FK_ProductTypeProduct">
             <End Role="ProductType" EntitySet="ProductTypes" />
             <End Role="Product" EntitySet="Products" />
@@ -411,6 +433,15 @@
           <AssociationSet Name="CategoryProject" Association="CustomLightModel.CategoryProject">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <EntitySet Name="Specifications" EntityType="CustomLightModel.Specification" />
+          <AssociationSet Name="ProductSpecification" Association="CustomLightModel.ProductSpecification">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Specification" EntitySet="Specifications" />
+          </AssociationSet>
+          <AssociationSet Name="SpecificationSpecificationValue" Association="CustomLightModel.SpecificationSpecificationValue">
+            <End Role="Specification" EntitySet="Specifications" />
+            <End Role="SpecificationValue" EntitySet="SpecificationValues" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -496,9 +527,9 @@
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ProductTypeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ProductImages" Relationship="CustomLightModel.FK_ProductProductImage" FromRole="Product" ToRole="ProductImage" />
-          <NavigationProperty Name="SpecificationValues" Relationship="CustomLightModel.FK_ProductSpecificationValue" FromRole="Product" ToRole="SpecificationValue" />
           <NavigationProperty Name="ProductType" Relationship="CustomLightModel.FK_ProductTypeProduct" FromRole="Product" ToRole="ProductType" />
           <NavigationProperty Name="Categories" Relationship="CustomLightModel.CategoryProduct" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Specifications" Relationship="CustomLightModel.ProductSpecification" FromRole="Product" ToRole="Specification" />
         </EntityType>
         <EntityType Name="ProductType">
           <Key>
@@ -561,10 +592,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Value" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="SpecificationTitleId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="CustomLightModel.FK_ProductSpecificationValue" FromRole="SpecificationValue" ToRole="Product" />
           <NavigationProperty Name="SpecificationTitle" Relationship="CustomLightModel.FK_SpecificationTitleSpecificationValue" FromRole="SpecificationValue" ToRole="SpecificationTitle" />
+          <NavigationProperty Name="Specification" Relationship="CustomLightModel.SpecificationSpecificationValue" FromRole="SpecificationValue" ToRole="Specification" />
+          <Property Name="SpecificationId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_ProductProductImage">
           <End Type="CustomLightModel.Product" Role="Product" Multiplicity="1">
@@ -576,20 +607,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ProductImage">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductSpecificationValue">
-          <End Type="CustomLightModel.Product" Role="Product" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="CustomLightModel.SpecificationValue" Role="SpecificationValue" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SpecificationValue">
               <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
@@ -655,6 +672,43 @@
         <Association Name="CategoryProject">
           <End Type="CustomLightModel.Category" Role="Category" Multiplicity="*" />
           <End Type="CustomLightModel.Project" Role="Project" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Specification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Product" Relationship="CustomLightModel.ProductSpecification" FromRole="Specification" ToRole="Product" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SpecificationValues" Relationship="CustomLightModel.SpecificationSpecificationValue" FromRole="Specification" ToRole="SpecificationValue" />
+        </EntityType>
+        <Association Name="ProductSpecification">
+          <End Type="CustomLightModel.Product" Role="Product" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CustomLightModel.Specification" Role="Specification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Specification">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SpecificationSpecificationValue">
+          <End Type="CustomLightModel.Specification" Role="Specification" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CustomLightModel.SpecificationValue" Role="SpecificationValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SpecificationValue">
+              <PropertyRef Name="SpecificationId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -795,8 +849,16 @@
         <MappingFragment StoreEntitySet="SpecificationValues">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Value" ColumnName="Value" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="SpecificationTitleId" ColumnName="SpecificationTitleId" />
+          <ScalarProperty Name="SpecificationId" ColumnName="SpecificationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Specifications">
+      <EntityTypeMapping TypeName="IsTypeOf(CustomLightModel.Specification)">
+        <MappingFragment StoreEntitySet="Specifications">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
