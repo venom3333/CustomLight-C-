@@ -25,6 +25,9 @@ namespace CustomLight.App_Start
 			bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
 					  "~/Scripts/bootstrap.js"));
 
+			bundles.Add(new ScriptBundle("~/bundles/custom").Include(
+				"~/Scripts/custom/carousel.js"));
+
 			bundles.Add(new StyleBundle("~/Content/css").Include(
 					  "~/Content/bootstrap.min.css",
 					  "~/Content/sass/base.min.css",

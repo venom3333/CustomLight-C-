@@ -149,7 +149,8 @@
     <Content Include="Content\imgs\icons\icon_8.jpg" />
     <Content Include="Content\imgs\сustomlight-logo-w.svg" />
     <Content Include="Content\imgs\сustomlight-logo.svg" />
-    <Content Include="Content\js\cart.js" />
+    <Content Include="Scripts\custom\carousel.js" />
+    <Content Include="Scripts\custom\cart.js" />
     <Content Include="Content\sass\admin.css">
       <DependentUpon>admin.scss</DependentUpon>
     </Content>
