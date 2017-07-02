@@ -12,10 +12,8 @@ using System.Web.UI;
 
 namespace CustomLight.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
-        private CustomLightEntities db = new CustomLightEntities();
-
         // GET: Products
         public async Task<ActionResult> Index()
         {

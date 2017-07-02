@@ -21,6 +21,13 @@
 	<section class="content">
 		<div id="content">
 			@RenderBody()
+
+			@*О компании*@
+			<div class="about-main col-md-8 col-md-offset-2">
+				<h3>О компании:</h3>
+				<p>@ViewBag.Essentials.About</p>
+			</div>
+			<div class="clearfix"></div>
 		</div>
 	</section>
 	<footer>

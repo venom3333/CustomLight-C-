@@ -83,7 +83,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
     <Property Name="LogoImageData" Type="varbinary(max)" Nullable="false" />
     <Property Name="LogoImageMimeType" Type="nvarchar(max)" Nullable="false" />
@@ -91,6 +91,9 @@
     <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Boss" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LogoImageInvertedData" Type="varbinary(max)" Nullable="false" />
+    <Property Name="LogoImageInvertedMimeType" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Orders">
     <Key>
@@ -104,7 +107,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Alias" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PageContent" Type="nvarchar(max)" Nullable="true" />
@@ -474,7 +477,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LogoImageData" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="LogoImageMimeType" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -482,6 +485,9 @@
           <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Boss" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="LogoImageInvertedData" Type="Binary" Nullable="false" />
+          <Property Name="LogoImageInvertedMimeType" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -495,7 +501,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Alias" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PageContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -741,6 +747,9 @@
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Boss" ColumnName="Boss" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LogoImageInvertedData" ColumnName="LogoImageInvertedData" />
+          <ScalarProperty Name="LogoImageInvertedMimeType" ColumnName="LogoImageInvertedMimeType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

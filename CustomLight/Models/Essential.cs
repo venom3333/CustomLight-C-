@@ -22,5 +22,8 @@ namespace CustomLight.Models
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Boss { get; set; }
+        public string Email { get; set; }
+        public byte[] LogoImageInvertedData { get; set; }
+        public string LogoImageInvertedMimeType { get; set; }
     }
 }

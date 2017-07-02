@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/30/2017 18:17:23
+-- Date Created: 07/02/2017 17:08:23
 -- Generated from EDMX file: D:\vsProjects\c#\web\CustomLight\CustomLight\Models\CustomLightDbModel.edmx
 -- --------------------------------------------------
 
@@ -120,14 +120,17 @@ GO
 
 -- Creating table 'Essentials'
 CREATE TABLE [dbo].[Essentials] (
-    [Id] int  NOT NULL,
+    [Id] int IDENTITY(1,1) NOT NULL,
     [Title] nvarchar(max)  NOT NULL,
     [LogoImageData] varbinary(max)  NOT NULL,
     [LogoImageMimeType] nvarchar(max)  NOT NULL,
     [About] nvarchar(max)  NOT NULL,
     [Address] nvarchar(max)  NOT NULL,
     [Phone] nvarchar(max)  NOT NULL,
-    [Boss] nvarchar(max)  NOT NULL
+    [Boss] nvarchar(max)  NOT NULL,
+    [Email] nvarchar(max)  NOT NULL,
+    [LogoImageInvertedData] varbinary(max)  NOT NULL,
+    [LogoImageInvertedMimeType] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -141,7 +144,7 @@ GO
 
 -- Creating table 'Pages'
 CREATE TABLE [dbo].[Pages] (
-    [Id] int  NOT NULL,
+    [Id] int IDENTITY(1,1) NOT NULL,
     [Alias] nvarchar(max)  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [PageContent] nvarchar(max)  NULL,

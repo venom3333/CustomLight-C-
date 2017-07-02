@@ -12,10 +12,8 @@ using System.Web.UI;
 
 namespace CustomLight.Controllers
 {
-    public class ProjectsController : Controller
-    {
-        private CustomLightEntities db = new CustomLightEntities();
-
+    public class ProjectsController : BaseController
+	{
         // GET: Projects
         public async Task<ActionResult> Index()
         {
