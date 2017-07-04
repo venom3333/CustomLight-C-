@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/02/2017 17:08:23
+-- Date Created: 07/04/2017 17:08:30
 -- Generated from EDMX file: D:\vsProjects\c#\web\CustomLight\CustomLight\Models\CustomLightDbModel.edmx
 -- --------------------------------------------------
 
@@ -237,7 +237,8 @@ GO
 -- Creating table 'Specifications'
 CREATE TABLE [dbo].[Specifications] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [ProductId] int  NOT NULL
+    [ProductId] int  NOT NULL,
+    [Price] int  NOT NULL
 );
 GO
 

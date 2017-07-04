@@ -110,7 +110,6 @@ namespace CustomLight.UnitTests
 				new SpecificationTitle { Name = "Высота" },
 				new SpecificationTitle { Name = "Мощность" },
 				new SpecificationTitle { Name = "Световой поток" },
-				new SpecificationTitle { Name = "Цена" }
 			};
 
 			db.ProductTypes.Add(new ProductType
@@ -205,9 +204,10 @@ namespace CustomLight.UnitTests
 					specs.Add
 						(
 							new Specification
-								{
-									SpecificationValues = (db.SpecificationTitles.Where(st => st.ProductType.Name == pt).ToList()).Select(t => new SpecificationValue { SpecificationTitleId = t.Id, Value = new Random().Next(10, 150).ToString() }).ToList(),
-								}
+							{
+								SpecificationValues = (db.SpecificationTitles.Where(st => st.ProductType.Name == pt).ToList()).Select(t => new SpecificationValue { SpecificationTitleId = t.Id, Value = new Random().Next(10, 150).ToString() }).ToList(),
+								Price = new Random().Next(500, 1500)
+							}
 						);
 				}
 				product.Specifications = specs;

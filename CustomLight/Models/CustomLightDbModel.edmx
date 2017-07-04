@@ -201,6 +201,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CategoryProduct">
     <Key>
@@ -687,6 +688,7 @@
           <NavigationProperty Name="Product" Relationship="CustomLightModel.ProductSpecification" FromRole="Specification" ToRole="Product" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SpecificationValues" Relationship="CustomLightModel.SpecificationSpecificationValue" FromRole="Specification" ToRole="SpecificationValue" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="ProductSpecification">
           <End Type="CustomLightModel.Product" Role="Product" Multiplicity="1" >
@@ -868,6 +870,7 @@
         <MappingFragment StoreEntitySet="Specifications">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
